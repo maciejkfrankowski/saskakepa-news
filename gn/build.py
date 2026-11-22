@@ -7,6 +7,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import zlib
 from datetime import date
 from pathlib import Path
 
@@ -22,6 +23,54 @@ DIST = ROOT / "dist"
 T: dict = {}  # teksty interfejsu z i18n/<lang>.yaml, ładowane w build()
 PL_MAP = str.maketrans({**str.maketrans("ąćęłńóśźż", "acelnoszz"),
                         ord("ä"): "ae", ord("ö"): "oe", ord("ü"): "ue", ord("ß"): "ss"})
+
+
+POOL_DIR = Path("static") / "img" / "topics-photo"
+POOL_FILE = re.compile(r"^([a-z]+)[-_ ].*\.(jpe?g|png|webp)$", re.I)
+POOL_WIDTH = 800
+
+
+def photo_pool(root: Path) -> dict[str, list[str]]:
+    """Pula zdjęć tematycznych: pliki `<temat>-<cokolwiek>.jpg|png|webp` pogrupowane po temacie."""
+    pool: dict[str, list[str]] = {}
+    folder = root / POOL_DIR
+    for path in sorted(folder.iterdir()) if folder.is_dir() else []:
+        match = POOL_FILE.match(path.name)
+        if match:
+            pool.setdefault(match.group(1).lower(), []).append(path.name)
+    return pool
+
+
+def pick_photo(pool: dict[str, list[str]], topic: str, key: str) -> str:
+    """Zdjęcie z puli dla tematu (albo z grupy `general`); to samo dla danego wpisu przy każdej budowie."""
+    files = pool.get(topic) or pool.get("general") or []
+    return files[zlib.crc32(key.encode()) % len(files)] if files else ""
+
+
+def publish_pool(pool: dict[str, list[str]], dist: Path) -> dict[str, str]:
+    """Zmniejsza zdjęcia z puli do WebP w `dist/` (oryginały zostają tylko w repo). Zwraca nazwa -> ścieżka."""
+    folder = dist / POOL_DIR
+    names = [name for files in pool.values() for name in files]
+    try:
+        from PIL import Image, ImageOps
+    except ImportError:  # bez Pillow publikujemy oryginały
+        return {name: (POOL_DIR / name).as_posix() for name in names}
+    published = {}
+    for name in names:
+        source = folder / name
+        target = source.with_suffix(".webp")
+        try:
+            with Image.open(source) as image:
+                image = ImageOps.exif_transpose(image).convert("RGB")
+                image.thumbnail((POOL_WIDTH, POOL_WIDTH * 2))
+                image.save(target, "WEBP", quality=80)
+            if source != target:
+                source.unlink()
+            published[name] = (POOL_DIR / target.name).as_posix()
+        except Exception as error:  # noqa: BLE001 – uszkodzony plik nie może zatrzymać budowy
+            print(f"Pula zdjęć: pominięto {name}: {error}")
+            source.unlink(missing_ok=True)
+    return published
 
 
 def date_pl(iso: str) -> str:
@@ -141,6 +190,11 @@ def build() -> None:
     for entry in everything:  # ilustracja tematyczna tylko tam, gdzie nie ma zdjęcia
         entry["topic"] = "" if entry["image"] or entry["event_date"] else next(
             (name for name, pattern in topics if pattern.search(entry["title"])), "")
+    # zdjęcie ilustracyjne z puli zastępuje rysowaną ilustrację; wpisy ze zdjęciem i wydarzenia zostają bez zmian
+    pool = photo_pool(ROOT)
+    for entry in everything:
+        entry["pool_file"] = "" if entry["image"] or entry["event_date"] else pick_photo(
+            pool, entry["topic"], entry.get("id") or entry["href"])
     # Wydarzenia (z terminem) idą osobnym torem: tylko nadchodzące, od najbliższego
     events = sorted((e for e in everything if e["event_date"][:10] >= today_iso),
                     key=lambda e: e["event_date"])
@@ -168,6 +222,9 @@ def build() -> None:
         shutil.rmtree(DIST)
     shutil.copytree(ROOT / "static", DIST / "static")
     shutil.copytree(ROOT / "admin", DIST / "admin")
+    published = publish_pool(pool, DIST)
+    for entry in everything:
+        entry["photo"] = published.get(entry.pop("pool_file"), "")
     (DIST / ".nojekyll").write_text("")
 
     def render(template: str, target: str, **context) -> None:
@@ -216,7 +273,7 @@ def build() -> None:
     render("rozrywka.html", paths["fun"], active="fun", sudoku=sudoku, crosswords=crosswords,
            sudoku_date=date_pl(today_iso))
     render("zrodla.html", paths["sources"], sources=sources, active="",
-           status={s["id"]: s for s in status})
+           status={s["id"]: s for s in status}, pool={topic: len(files) for topic, files in pool.items()})
     if site.get("operator"):  # strony wymagane prawem (np. w Niemczech)
         render("impressum.html", paths["imprint"], active="")
         render("datenschutz.html", paths["privacy"], active="")

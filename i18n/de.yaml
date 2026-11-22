@@ -67,6 +67,8 @@ more_news: Alle Meldungen
 
 # Themenbilder für Meldungen ohne Foto: Thema -> regulärer Ausdruck, der im Titel gesucht wird
 # (Reihenfolge = Vorrang; ohne Treffer bleibt die Rubrik-Kachel).
+photo_label: Symbolbild
+photo_pool: Symbolbilder (Thema und Anzahl)
 topics:
   swim: '(schwimm|hallenbad|freibad|dlrg|rettungsschwimm)'
   train: '(bahnhof|hunsrückbahn|zugverkehr|\bzüge|schienen|ersatzverkehr|rheinstrecke|\bbahn)'

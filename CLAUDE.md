@@ -12,6 +12,7 @@ Etap: demo na darmowej infrastrukturze (GitHub Actions + Pages). Docelowo możli
   Nie kopiujemy pełnych treści ani zdjęć. Mediów komercyjnych nie pobieramy.
 - Każde źródło = wpis w `sources.yaml`. Nowy adapter tylko wtedy, gdy istniejące nie wystarczą.
 - Paczki z poprawkami zawierają wyłącznie kod. Nigdy: `data/`, `content/`, `static/img/uploads/`,
+  `static/img/topics-photo/`,
   `site.yaml`, `sources.yaml`, `admin/config.yml` – te pliki żyją w repo (bot, redakcja, edycje na GitHubie).
   Zmiany w konfiguracji przekazujemy jako fragment do wklejenia.
 - Adapter ma funkcję `parse(content, source) -> list[Item]` (testowalna offline) i `fetch(source)`.
@@ -33,6 +34,7 @@ Etap: demo na darmowej infrastrukturze (GitHub Actions + Pages). Docelowo możli
 | `gn/sudoku.py`, `static/sudoku.js` | generator i gra „Sudoku dnia” |
 | `gn/build.py` | generator `dist/` |
 | `templates/`, `static/` | szablony Jinja2, CSS, JS |
+| `static/img/topics-photo/` | pula zdjęć ilustracyjnych (pliki wgrywa redakcja; opis w `docs/03-pula-zdjec-ai.md`) |
 | `content/articles/` | własne artykuły (Markdown + YAML) |
 | `content/krzyzowki/` | gotowe krzyżówki jako samodzielne pliki HTML |
 | `admin/` | panel redakcji: Sveltia CMS (wersja przypięta w `index.html`), pola w `config.yml` |

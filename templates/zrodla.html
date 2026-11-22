@@ -16,4 +16,7 @@
   {% endfor %}
   </tbody>
 </table></div>
+{% if pool %}
+<p class="lead">{{ t.photo_pool }}: {% for topic, count in pool|dictsort %}{{ topic }} {{ count }}{{ ", " if not loop.last }}{% endfor %}.</p>
+{% endif %}
 {% endblock %}

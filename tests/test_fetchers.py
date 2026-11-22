@@ -4,6 +4,7 @@ import unittest
 from unittest import mock
 
 from gn import fetch
+from gn.build import photo_pool, pick_photo
 from gn.fetch import add_images, merge
 from gn.fetchers import html_links, rss, tribe_events
 from gn.models import clean_lead
@@ -244,6 +245,24 @@ class SaskaTest(unittest.TestCase):
         self.assertEqual([i.title for i in items if keep.search(f"{i.title} {i.lead}")],
                          ["Spacer śladami architektury"])
         self.assertTrue(fetch.include_pattern("KĘPA").search("kino kępa"))
+
+
+class PhotoPoolTest(unittest.TestCase):
+    def test_groups_and_stable_choice(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp) / "static" / "img" / "topics-photo"
+            folder.mkdir(parents=True)
+            for name in ("road-1.jpg", "road-2.PNG", "general-1.webp", "notatki.txt", "bus.jpg"):
+                (folder / name).write_bytes(b"x")
+            pool = photo_pool(Path(tmp))
+        self.assertEqual(pool, {"general": ["general-1.webp"], "road": ["road-1.jpg", "road-2.PNG"]})
+        self.assertIn(pick_photo(pool, "road", "abc"), pool["road"])
+        self.assertEqual(pick_photo(pool, "road", "abc"), pick_photo(pool, "road", "abc"))
+        self.assertEqual(pick_photo(pool, "", "abc"), "general-1.webp")   # brak tematu -> grupa ogólna
+        self.assertEqual(pick_photo(pool, "cinema", "abc"), "general-1.webp")
+        self.assertEqual(pick_photo({}, "road", "abc"), "")
 
 
 class RssTest(unittest.TestCase):

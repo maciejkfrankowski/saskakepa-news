@@ -88,3 +88,10 @@ z seedem `data:poziom`, więc w danym dniu plansze są stałe. Każda ma dokład
 - Cron w Actions bywa opóźniony; harmonogram wyłącza się po 60 dniach bez aktywności w repo.
 - Pogoda (Open-Meteo) i wyszukiwarka działają w przeglądarce; brak newslettera i formularzy.
 - Policja (KSP) nie jest podłączona: strona z filtrem jednostki nie dała się odczytać – do ustalenia adres.
+
+## Pula zdjęć ilustracyjnych (od 2026-11-22)
+Zdjęcia tematyczne (obecnie z Pixabay, lista źródeł w `zrodla.csv` w tym samym folderze) przejrzane przez redakcję leżą w
+`static/img/topics-photo/<temat>-<n>.jpg`. `gn/build.py` grupuje je po temacie, zmniejsza do WebP 800 px
+(tylko w `dist/`) i przypisuje wpisom bez własnego zdjęcia i bez miniatury ze źródła; brak tematu → grupa
+`general`; brak plików → rysowana ilustracja SVG. Każde takie zdjęcie ma podpis „Zdjęcie ilustracyjne” (de: „Symbolbild”).
+Opis scen i zasady: `docs/03-pula-zdjec-ai.md`. Folder należy do treści repo – paczki z kodem go nie nadpisują.
