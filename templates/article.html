@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ entry.title }} – {{ site.title }} {{ site.subtitle }}{% endblock %}
+{% block main %}
+<p class="crumbs"><a href="{{ root }}">{{ t.home }}</a> › <a href="{{ root }}{{ p.cat }}/{{ entry.cat.slug }}/">{{ entry.cat.name }}</a></p>
+<article class="article">
+  <span class="tag" style="--c: {{ entry.cat.color }}">{{ entry.cat.name }}</span>
+  <h1>{{ entry.title }}</h1>
+  {{ m.meta(entry) }}
+  {% if entry.lead %}<p class="article-lead">{{ entry.lead }}</p>{% endif %}
+  {% if entry.image %}
+  <figure><img src="{{ root ~ entry.image }}" alt="">
+    {% if entry.image_credit %}<figcaption>{{ t.photo_by }} {{ entry.image_credit }}</figcaption>{% endif %}</figure>
+  {% endif %}
+  <div class="prose">{{ entry.body|safe }}</div>
+</article>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ cat.name }} – {{ site.title }} {{ site.subtitle }}{% endblock %}
+{% block main %}
+<p class="crumbs"><a href="{{ root or './' }}">{{ t.home }}</a> › {{ cat.name }}</p>
+<header class="sec"><h1>{{ cat.name }}</h1></header>
+{% if entries %}
+<div class="grid">{% for e in entries %}{{ m.card(e, root) }}{% endfor %}</div>
+{% else %}
+<p class="panel empty">{{ t.empty_category }}</p>
+{% endif %}
+{% endblock %}

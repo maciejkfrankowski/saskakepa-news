@@ -1,0 +1,48 @@
+{% import "_macros.html" as m %}
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% block title %}{{ site.title }} {{ site.subtitle }} – {{ site.tagline }}{% endblock %}</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="stylesheet" href="{{ root }}static/style.css">
+</head>
+<body data-root="{{ root }}" data-no-results="{{ t.no_results }}"{% if site.weather %} data-lat="{{ site.weather.lat }}" data-lon="{{ site.weather.lon }}"{% endif %}>
+<header class="top wrap">
+  <a class="logo" href="{{ root or './' }}" aria-label="{{ site.title }} – {{ t.home_label }}">
+    <span class="logo-name">{{ site.title|upper }}</span>
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="logo-sub">{{ site.subtitle }}</span>
+  </a>
+  <nav class="nav" aria-label="{{ t.nav_main }}">
+    <a href="{{ root or './' }}"{% if not active %} class="on"{% endif %}>{{ t.nav_news }}</a>
+    {% for c in nav %}<a href="{{ root ~ '#' ~ c.slug if c.slug in anchors else root ~ p.cat ~ '/' ~ c.slug ~ '/' }}"{% if active == c.slug %} class="on"{% endif %}>{{ c.name }}</a>{% endfor %}
+    {% if show_events %}<a href="{{ root ~ '#' ~ p.events if events_anchor else root ~ p.events ~ '/' }}"{% if active == 'events' %} class="on"{% endif %}>{{ t.nav_events }}</a>{% endif %}
+    <a href="{{ root }}{{ p.fun }}/"{% if active == 'fun' %} class="on"{% endif %}>{{ t.nav_fun }}</a>
+  </nav>
+  <div class="tools">
+    <p class="today"><span id="today"></span><span id="weather" hidden></span></p>
+    <label class="search">{{ m.icon('search') }}<span class="sr">{{ t.search }}</span>
+      <input id="q" type="search" placeholder="{{ t.search_placeholder }}" autocomplete="off"></label>
+    <div id="results" class="results" hidden></div>
+  </div>
+</header>
+<main class="wrap">
+{% block main %}{% endblock %}
+</main>
+<footer class="foot wrap">
+  <p>{{ site.title }} {{ site.subtitle }} · {{ t.updated }}: {{ build_date }}</p>
+  <p>{% if site.operator %}<a href="{{ root }}{{ p.imprint }}/">{{ t.imprint }}</a> · <a href="{{ root }}{{ p.privacy }}/">{{ t.privacy }}</a> · {% endif %}<a href="{{ root }}{{ p.sources }}/">{{ t.sources_link }}</a> · <a href="{{ root }}admin/" rel="nofollow">{{ t.admin_link }}</a> · {{ t.external_note }}</p>
+</footer>
+<nav class="tabbar" aria-label="{{ t.tab_shortcuts }}">
+  <a href="{{ root or './' }}"{% if not active %} class="on"{% endif %}>{{ m.icon('home') }}{{ t.nav_news }}</a>
+  {% for c in tabs[:1] %}<a href="{{ root ~ '#' ~ c.slug if c.slug in anchors else root ~ p.cat ~ '/' ~ c.slug ~ '/' }}"{% if active == c.slug %} class="on"{% endif %}>{{ m.icon(c.icon) }}{{ c.short or c.name.split()[0] }}</a>{% endfor %}
+  {% if show_events %}<a href="{{ root ~ '#' ~ p.events if events_anchor else root ~ p.events ~ '/' }}"{% if active == 'events' %} class="on"{% endif %}>{{ m.icon('calendar') }}{{ t.nav_events }}</a>{% endif %}
+  {% for c in tabs[1:2] %}<a href="{{ root ~ '#' ~ c.slug if c.slug in anchors else root ~ p.cat ~ '/' ~ c.slug ~ '/' }}"{% if active == c.slug %} class="on"{% endif %}>{{ m.icon(c.icon) }}{{ c.short or c.name.split()[0] }}</a>{% endfor %}
+  <a href="{{ root }}{{ p.fun }}/"{% if active == 'fun' %} class="on"{% endif %}>{{ m.icon('puzzle') }}{{ t.nav_fun }}</a>
+</nav>
+<script src="{{ root }}static/app.js" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

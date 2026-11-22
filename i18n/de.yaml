@@ -1,0 +1,87 @@
+# Texte der Oberfläche – Deutsch
+months: [Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+date_fmt: "{d}. {month} {y}"
+event_fmt: "{d}. {month}"
+event_time_fmt: ", {time} Uhr"
+paths: {cat: kategorie, article: artikel, events: veranstaltungen, fun: raetsel, sources: quellen, crosswords: kreuzwortraetsel, imprint: impressum, privacy: datenschutz}
+home_label: Startseite
+nav_main: Hauptmenü
+nav_news: Aktuelles
+nav_events: Veranstaltungen
+nav_fun: Rätsel
+tab_shortcuts: Schnellzugriff
+search: Suche
+search_placeholder: Nachrichten suchen …
+no_results: Keine Treffer
+updated: aktualisiert
+sources_link: Quellen und Abrufstatus
+admin_link: Redaktion
+external_note: Externe Meldungen führen zu den Seiten der jeweiligen Quelle.
+today_suffix: heute
+top: Das Wichtigste
+see_all: Alle anzeigen
+event: Veranstaltung
+upcoming: Nächste Veranstaltungen
+upcoming_title: Kommende Veranstaltungen
+no_events: Derzeit sind keine kommenden Veranstaltungen im Kalender.
+useful: Nützliches
+ad_label: Lokaler Partner · Anzeige
+ad_subject: Werbung auf der Seite
+contact_title: Schreiben Sie uns
+contact_text: Haben Sie eine Frage, eine Idee oder ein Anliegen? Schreiben Sie der Redaktion.
+contact_buttons: [Thema vorschlagen, Veranstaltung melden, Problem melden]
+home: Startseite
+empty_category: Die Quellen für diese Rubrik sind in Vorbereitung.
+editorial: Redaktion
+photo_by: "Foto:"
+fun_title: "Rätsel: Sudoku"
+sudoku_title: Sudoku des Tages
+sudoku_link: Sudoku des Tages
+sudoku_levels: {latwe: Leicht, srednie: Mittel, trudne: Schwer}
+sudoku_level_label: Schwierigkeitsgrad
+sudoku_board: Sudoku-Feld
+sudoku_digits: Ziffern
+sudoku_erase: Feld leeren
+sudoku_check: Prüfen
+sudoku_reset: Neu beginnen
+sudoku_help: Feld auswählen und eine Ziffer von 1 bis 9 eintragen. In jeder Zeile, jeder Spalte und jedem 3×3-Block kommt jede Ziffer genau einmal vor. Jeden Tag ein neues Rätsel.
+sudoku_solved: Geschafft! Das Rätsel ist gelöst.
+sudoku_wrong: "Falsche Felder: {n}."
+sudoku_left: "Bisher keine Fehler. Offene Felder: {n}."
+sudoku_cell: "Zeile {r}, Spalte {c}: {v}"
+sudoku_empty: leer
+crosswords: Kreuzworträtsel
+crossword: Kreuzworträtsel
+crossword_solve: Lösen
+crosswords_soon: Kreuzworträtsel folgen in Kürze.
+crossword_suffix: Kreuzworträtsel
+src_title: Quellen und Abrufstatus
+src_cols: [Quelle, Status, Gefunden, Neu, Geprüft (UTC)]
+src_off: deaktiviert
+src_never: noch nicht abgerufen
+src_ok: OK
+src_err: Fehler
+imprint: Impressum
+privacy: Datenschutz
+more_news: Alle Meldungen
+
+# Themenbilder für Meldungen ohne Foto: Thema -> regulärer Ausdruck, der im Titel gesucht wird
+# (Reihenfolge = Vorrang; ohne Treffer bleibt die Rubrik-Kachel).
+topics:
+  swim: '(schwimm|hallenbad|freibad|dlrg|rettungsschwimm)'
+  train: '(bahnhof|hunsrückbahn|zugverkehr|\bzüge|schienen|ersatzverkehr|rheinstrecke|\bbahn)'
+  bus: '(\bbus|buslinie|fahrplan|haltestelle|öpnv|verkehrsverbund|deutschlandticket|\bticket)'
+  fire: '(feuerwehr|\bbrand|katastrophenschutz|löschzug)'
+  police: '(polizei|diebstahl|einbruch|betrug|verkehrsunfall)'
+  waste: '(abfall|müll|entsorgung|wertstoff|sperrmüll|\btonne|recycling|kleidercontainer|strauchschnitt)'
+  water: '(wasser|hochbehälter|pumpwerk|abwasser|kanalisation)'
+  health: '(gesund|klinik|krankenhaus|\barzt|impf|pflege|blutspende)'
+  library: '(bücher|\bbuch\b|lesung|bibliothek|bücherei)'
+  cinema: '(\bkino|\bfilm)'
+  school: '(schule|schüler|\bkita|kindergarten|ausbildung|azubi|volkshochschule|\bvhs|schulbuch)'
+  council: '(stadtrat|sitzung|ausschuss|bürgermeister|haushalt|beschl[uü]ss|kreistag|satzung|\bwahl|kreisverwaltung)'
+  sport: '(heimspiel|turnier|\bliga|meisterschaft|sport|volkslauf|\blauf|sieg\b|volley|ruder|mannschaft|regatta|radsport)'
+  celebration: '(stadtfest|weinfest|\bfest\b|\\bfeier\\b|feierstunde|feierlich|jubiläum|ehrung|ausgezeichnet|weihnacht|kirmes|volkstrauertag|\bmarkt)'
+  stage: '(konzert|theater|ausstellung|festival|musik|orchester|\bchor|kultur)'
+  road: '(straße|strasse|sperrung|baustelle|bauarbeiten|umleitung|sanierung|brücke|radweg)'
+  notice: '(bekanntmachung|ausschreibung|auftrag|vergeben|hinweis|stellenangebot|umfrage|jahresabschluss|unterlagen)'

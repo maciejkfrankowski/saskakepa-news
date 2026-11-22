@@ -1,0 +1,53 @@
+{% macro icon(name) %}
+<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+{% if name == 'building' %}<path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6M3 21h18"/>
+{% elif name == 'map' %}<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/>
+{% elif name == 'ticket' %}<path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4zM14 6v12"/>
+{% elif name == 'shield' %}<path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.500 7-10V6z"/>
+{% elif name == 'bus' %}<path d="M5 17V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v11M4 17h16M5 11h14M8 17v2M16 17v2"/><circle cx="8.500" cy="14" r=".6"/><circle cx="15.500" cy="14" r=".6"/>
+{% elif name == 'pen' %}<path d="M4 20h4L19 9l-4-4L4 16zM13.500 6.500l4 4"/>
+{% elif name == 'puzzle' %}<path d="M4 4h16v16H4zM4 9.300h16M4 14.700h16M9.300 4v16M14.700 4v16"/>
+{% elif name == 'ball' %}<circle cx="12" cy="12" r="8.500"/><path d="M12 3.500v17M3.500 12h17M6 6c2.500 2 2.500 10 0 12M18 6c-2.500 2-2.500 10 0 12"/>
+{% elif name == 'heart' %}<path d="M12 20s-7-4.300-7-9.500A4 4 0 0 1 12 8a4 4 0 0 1 7 2.500c0 5.200-7 9.500-7 9.500zM12 11v4M10 13h4"/>
+{% elif name == 'trash' %}<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/>
+{% elif name == 'recycle' %}<path d="M7 19H4.500L8 13M17 19h2.500L16 13M12 4 8.500 10M12 4l3.500 6M9 19h6M6.500 11.500 8.500 10l.5 2.500M17.500 11.500 15.500 10l-.5 2.500"/>
+{% elif name == 'train' %}<path d="M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM5 11h14M8 17l-2 3M16 17l2 3"/><circle cx="8.500" cy="14" r=".6"/><circle cx="15.500" cy="14" r=".6"/>
+{% elif name == 'briefcase' %}<path d="M4 8h16v11H4zM9 8V5h6v3M4 13h16"/>
+{% elif name == 'pin' %}<path d="M12 21s-6-5.500-6-10.500a6 6 0 0 1 12 0C18 15.500 12 21 12 21z"/><circle cx="12" cy="10.500" r="2"/>
+{% elif name == 'drop' %}<path d="M12 3.500s-6 6.500-6 10.500a6 6 0 0 0 12 0c0-4-6-10.500-6-10.500z"/>
+{% elif name == 'home' %}<path d="M3 11 12 4l9 7M5 10v10h14V10"/>
+{% elif name == 'search' %}<circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/>
+{% elif name == 'calendar' %}<path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/>
+{% elif name == 'mail' %}<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>
+{% elif name == 'alert' %}<path d="M12 4 2.500 20h19zM12 10v4M12 17v.5"/>
+{% elif name == 'bulb' %}<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.500c.7.700 1 1.500 1 2.500h6c0-1 .3-1.800 1-2.500A6 6 0 0 0 12 3z"/>
+{% else %}<circle cx="12" cy="12" r="8"/>{% endif %}
+</svg>
+{% endmacro %}
+
+{% macro link(entry, root) -%}
+href="{{ entry.href if entry.external else root ~ entry.href }}"{% if entry.external %} target="_blank" rel="noopener"{% endif %}
+{%- endmacro %}
+
+{% macro meta(entry) %}
+<p class="meta">{{ icon('calendar') }}{% if entry.event_date %}<time datetime="{{ entry.event_date[:10] }}">{{ entry.event_pl }}</time>{% else %}<time datetime="{{ entry.published }}">{{ entry.date_pl }}</time>{% endif %}
+<span class="src">{{ entry.source_name }}{% if entry.external %} ↗{% endif %}</span></p>
+{% endmacro %}
+
+{% macro card(entry, root) %}
+<article class="card">
+  <a class="thumb" {{ link(entry, root) }} style="--c: {{ entry.cat.color }}"{% if entry.image or entry.topic %} data-img{% endif %}>
+    {% if entry.image and entry.external %}{{ icon(entry.cat.icon) }}<img src="{{ entry.image }}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.removeAttribute('data-img');this.remove()">
+    {% elif entry.image %}<img src="{{ root ~ entry.image }}" alt="" loading="lazy">
+    {% elif entry.topic %}<img class="topic" src="{{ root }}static/img/topics/{{ entry.topic }}.svg" alt="" loading="lazy">
+    {% elif entry.event_date %}<span class="when"><b>{{ entry.event_day }}</b>{{ entry.event_mon }}</span>
+    {% else %}{{ icon(entry.cat.icon) }}{% endif %}
+    <span class="tag">{{ t.event if entry.event_date else entry.cat.name }}</span>
+  </a>
+  <div class="card-body">
+    <h3><a {{ link(entry, root) }}>{{ entry.title }}</a></h3>
+    {% if entry.lead %}<p class="lead">{{ entry.lead }}</p>{% endif %}
+    {{ meta(entry) }}
+  </div>
+</article>
+{% endmacro %}

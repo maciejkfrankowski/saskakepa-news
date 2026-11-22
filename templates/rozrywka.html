@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ t.fun_title }} – {{ site.title }} {{ site.subtitle }}{% endblock %}
+{% block main %}
+<p class="crumbs"><a href="{{ root }}">{{ t.home }}</a> › {{ t.nav_fun }}</p>
+<header class="sec"><h1>{{ t.sudoku_title }}</h1><span class="sudoku-date">{{ sudoku_date }}</span></header>
+<section class="sudoku" id="sudoku" data-solved="{{ t.sudoku_solved }}" data-wrong="{{ t.sudoku_wrong }}" data-left="{{ t.sudoku_left }}" data-cell="{{ t.sudoku_cell }}" data-empty="{{ t.sudoku_empty }}">
+  <div class="su-levels" role="tablist" aria-label="{{ t.sudoku_level_label }}">
+    {% for level in sudoku.levels %}<button type="button" role="tab" data-level="{{ level.slug }}">{{ level.name }}</button>{% endfor %}
+  </div>
+  <div class="su-board" id="su-board" role="grid" aria-label="{{ t.sudoku_board }}"></div>
+  <p class="su-msg" id="su-msg" role="status" aria-live="polite"></p>
+  <div class="su-pad" id="su-pad" aria-label="{{ t.sudoku_digits }}">
+    {% for n in range(1, 10) %}<button type="button" data-n="{{ n }}">{{ n }}</button>{% endfor %}
+    <button type="button" data-n="0" aria-label="{{ t.sudoku_erase }}">⌫</button>
+  </div>
+  <div class="su-actions">
+    <button type="button" id="su-check">{{ t.sudoku_check }}</button>
+    <button type="button" id="su-reset">{{ t.sudoku_reset }}</button>
+  </div>
+  <p class="su-help">{{ t.sudoku_help }}</p>
+</section>
+{% if crosswords %}
+<header class="sec" id="krzyzowki"><h2>{{ t.crosswords }}</h2></header>
+<div class="grid">
+  {% for c in crosswords %}
+  <article class="card">
+    <a class="thumb" href="{{ root ~ c.href }}" style="--c: #7a1f1f">{{ m.icon('puzzle') }}<span class="tag">{{ t.crossword }}</span></a>
+    <div class="card-body"><h3><a href="{{ root ~ c.href }}">{{ c.title }}</a></h3>
+      <a class="btn" href="{{ root ~ c.href }}">{{ t.crossword_solve }} →</a></div>
+  </article>
+  {% endfor %}
+</div>
+{% endif %}
+<script type="application/json" id="sudoku-data">{{ sudoku|tojson }}</script>
+{% endblock %}
+{% block scripts %}<script src="{{ root }}static/sudoku.js" defer></script>{% endblock %}

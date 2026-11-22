@@ -1,0 +1,54 @@
+# Panel redakcji (Sveltia CMS). Zapisuje pliki do repo przez API GitHuba;
+# każdy zapis to commit na main, który uruchamia przebudowę strony.
+backend:
+  name: github
+  repo: maciejkfrankowski/saskakepa-news
+  branch: main
+  skip_ci: false
+  commit_messages:
+    create: "artykul: nowy „{{slug}}”"
+    update: "artykul: zmiana „{{slug}}”"
+    delete: "artykul: usuniecie „{{slug}}”"
+    uploadMedia: "media: dodano {{path}}"
+    deleteMedia: "media: usunieto {{path}}"
+
+site_url: https://maciejkfrankowski.github.io/saskakepa-news/
+display_url: https://maciejkfrankowski.github.io/saskakepa-news/
+
+media_folder: static/img/uploads
+public_folder: static/img/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: articles
+    label: Artykuły
+    label_singular: Artykuł
+    folder: content/articles
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} ({{date}})"
+    sortable_fields: [date, title]
+    fields:
+      - {label: Tytuł, name: title, widget: string}
+      - {label: Data publikacji, name: date, widget: datetime, type: date}
+      - label: Kategoria
+        name: category
+        widget: select
+        default: redakcja
+        options:          # slugi muszą zgadzać się z site.yaml
+          - {label: Od redakcji, value: redakcja}
+          - {label: Kultura, value: kultura}
+          - {label: Dzielnica, value: dzielnica}
+          - {label: Stadion i okolica, value: okolica}
+          - {label: Bezpieczeństwo, value: bezpieczenstwo}
+      - {label: Zajawka, name: lead, widget: text, required: false, hint: "Jedno–dwa zdania widoczne na kartach i pod tytułem."}
+      - {label: Zdjęcie, name: image, widget: image, required: false}
+      - {label: Źródło zdjęcia, name: image_credit, widget: string, required: false, hint: "Autor lub instytucja, np. własne, UM Warszawa. Wyświetla się jako „Fot. …”."}
+      - {label: Wyróżnij na stronie głównej, name: featured, widget: boolean, default: false, hint: "Najnowszy wyróżniony artykuł trafia na górę strony głównej."}
+      - {label: Szkic (nie publikuj), name: draft, widget: boolean, default: false}
+      - {label: Treść, name: body, widget: markdown}

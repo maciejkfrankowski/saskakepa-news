@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="lead-row">
+  {% if hero %}
+  <a class="hero{% if hero.image %} has-img{% endif %}" {{ m.link(hero, root) }}>
+    {% if hero.image %}<img class="hero-img" src="{{ hero.image if hero.external else root ~ hero.image }}" alt=""{% if hero.external %} referrerpolicy="no-referrer"{% endif %}>{% endif %}
+    <span class="tag">{{ hero.cat.name }}</span>
+    <h1>{{ hero.title }}</h1>
+    {% if hero.lead %}<p>{{ hero.lead }}</p>{% endif %}
+    <span class="hero-meta">{{ hero.date_pl }} · {{ hero.source_name }}</span>
+    {% if hero.image and hero.image_credit %}<span class="credit">{{ t.photo_by }} {{ hero.image_credit }}</span>{% endif %}
+  </a>
+  {% endif %}
+  <aside class="panel today-box">
+    <header class="sec"><h2>{{ site.title }} {{ t.today_suffix }}</h2></header>
+    <ul class="rows">
+      {% for e in today %}
+      <li><a {{ m.link(e, root) }}>
+        <span class="row-ico" style="--c: {{ e.cat.color }}">{{ m.icon(e.cat.icon) }}</span>
+        <span><strong>{{ e.title }}</strong><small>{% if e.event_date %}{{ t.event }} · {{ e.event_pl }}{% else %}{{ e.cat.name }} · {{ e.date_pl }}{% endif %}</small></span>
+      </a></li>
+      {% endfor %}
+    </ul>
+    <a class="today-more" href="{{ root }}{{ p.fun }}/">{{ m.icon('puzzle') }}{{ t.sudoku_link }} →</a>
+  </aside>
+</section>
+
+<section>
+  <header class="sec"><h2>{{ t.top }}</h2></header>
+  <div class="top-row{% if not more %} solo{% endif %}">
+    <div class="top-big">{% for e in top %}{{ m.card(e, root) }}{% endfor %}</div>
+    {% if more %}
+    <div class="panel top-list">
+      <ul class="rows">
+        {% for e in more %}
+        <li><a {{ m.link(e, root) }}>
+          <span class="dot" style="background: {{ e.cat.color }}"></span>
+          <span><strong>{{ e.title }}</strong><small>{{ e.source_name }} · {{ e.date_pl }}</small></span>
+        </a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+  {% if site.ad.enabled %}
+  {% set ad_href = site.ad.url or ('mailto:' ~ site.contact_email ~ '?subject=' ~ (t.ad_subject|urlencode)) %}
+  <aside class="ad-strip">
+    {% if site.ad.image %}<a class="ad-img" href="{{ ad_href }}"{% if site.ad.url %} target="_blank" rel="sponsored noopener"{% endif %}><img src="{{ root ~ site.ad.image }}" alt="{{ site.ad.image_alt or site.ad.name }}" loading="lazy"></a>{% endif %}
+    <div class="ad-text"><span class="ad-label">{{ t.ad_label }}</span><h3>{{ site.ad.name }}</h3><p class="lead">{{ site.ad.text }}</p></div>
+    <a class="btn" href="{{ ad_href }}"{% if site.ad.url %} target="_blank" rel="sponsored noopener"{% endif %}>{{ site.ad.cta }} →</a>
+  </aside>
+  {% endif %}
+</section>
+
+{% for section in sections %}
+<section id="{{ section.cat.slug }}" class="anchor">
+  <header class="sec"><h2>{{ section.cat.name }}</h2>{% if section.total > section.entries|length %}<a href="{{ root }}{{ p.cat }}/{{ section.cat.slug }}/">{{ t.see_all }} ({{ section.total }}) →</a>{% endif %}</header>
+  <div class="grid">{% for e in section.entries %}{{ m.card(e, root) }}{% endfor %}</div>
+</section>
+{% endfor %}
+
+{% if site.useful %}
+<section>
+  <header class="sec"><h2>{{ t.useful }}</h2></header>
+  <div class="useful">
+    {% for u in site.useful %}
+    <a href="{{ u.url }}" target="_blank" rel="noopener">{{ m.icon(u.icon) }}
+      <span><strong>{{ u.label }}</strong>{% if u.note %}<small>{{ u.note }}</small>{% endif %}</span></a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if site.contact_email %}
+<section class="panel contact">
+  <div class="contact-head">{{ m.icon('mail') }}
+    <div><h2>{{ t.contact_title }}</h2><p>{{ site.contact_text or t.contact_text }}</p></div>
+  </div>
+  <div class="contact-btns">
+    {% for label in t.contact_buttons %}
+    <a href="mailto:{{ site.contact_email }}?subject={{ label|urlencode }}">{{ m.icon(['bulb', 'calendar', 'alert'][loop.index0]) }}{{ label }}</a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if events %}
+<section id="{{ p.events }}" class="anchor">
+  <header class="sec"><h2>{{ t.upcoming }}</h2>{% if events_total > events|length %}<a href="{{ root }}{{ p.events }}/">{{ t.see_all }} ({{ events_total }}) →</a>{% endif %}</header>
+  <div class="grid">{% for e in events %}{{ m.card(e, root) }}{% endfor %}</div>
+</section>
+{% endif %}
+{% endblock %}

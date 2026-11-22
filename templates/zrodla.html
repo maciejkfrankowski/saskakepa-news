@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ t.src_title }} – {{ site.title }} {{ site.subtitle }}{% endblock %}
+{% block main %}
+<p class="crumbs"><a href="{{ root }}">{{ t.home }}</a> › {{ t.src_title }}</p>
+<header class="sec"><h1>{{ t.src_title }}</h1></header>
+<div class="panel table-wrap"><table>
+  <thead><tr>{% for c in t.src_cols %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for s in sources %}{% set st = status.get(s.id) %}
+  <tr>
+    <td><a href="{{ s.home or s.url }}" target="_blank" rel="noopener">{{ s.name }}</a></td>
+    <td>{% if s.enabled is defined and not s.enabled %}{{ t.src_off }}{% elif not st %}{{ t.src_never }}{% elif st.ok %}<span class="ok">{{ t.src_ok }}</span>{% else %}<span class="err">{{ t.src_err }}</span> <small>{{ st.error }}</small>{% endif %}</td>
+    <td>{{ st.found if st else '–' }}</td><td>{{ st.added if st else '–' }}</td>
+    <td>{{ st.checked_at[:16]|replace('T', ' ') if st else '–' }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Impressum – {{ site.title }} {{ site.subtitle }}{% endblock %}
+{% block main %}
+<p class="crumbs"><a href="{{ root }}">{{ t.home }}</a> › Impressum</p>
+<article class="article">
+  <h1>Impressum</h1>
+  <div class="prose">
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>{{ site.operator.name }}<br>{% for line in site.operator.address %}{{ line }}<br>{% endfor %}</p>
+    <h2>Kontakt</h2>
+    <p>E-Mail: {{ site.operator.email }}</p>
+    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+    <p>{{ site.operator.name }}, Anschrift wie oben</p>
+    <h2>Hinweis zu den Inhalten</h2>
+    <p>Diese Seite ist ein privates, nicht kommerzielles Testprojekt. Sie verweist auf öffentlich zugängliche
+    Meldungen der jeweils genannten Stellen. Angezeigt werden nur Überschrift, ein kurzer Anriss, das Datum und
+    ein Link zur Originalquelle; die Rechte an den Inhalten liegen bei den jeweiligen Herausgebern.
+    Für die Inhalte verlinkter externer Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Potop – krzyżówka</title>
+<style>
+:root{
+  --parch:#f6ead0; --parch2:#e3cf9f; --ink:#3b2412; --bordo:#7a1f1f; --gold:#b08a3c;
+  --cell:#fffaf0; --line:#5a3a1a; --hl:#f3dfa6; --act:#e9b949; --bad:#c62828;
+  --s:clamp(13px, calc((100vw - 40px) / 23), 30px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--parch2);color:var(--ink);
+  font-family:Georgia,"Palatino Linotype","Book Antiqua",Palatino,"DejaVu Serif",serif}
+.page{max-width:1240px;margin:0 auto;min-height:100vh;padding:14px 10px 28px;
+  background:radial-gradient(ellipse at center,var(--parch) 55%,var(--parch2) 100%);
+  border:8px double var(--bordo)}
+header{text-align:center;margin-bottom:8px}
+h1{margin:0;font-size:clamp(30px,6vw,46px);font-style:italic;color:var(--bordo);letter-spacing:3px}
+h1 span{color:var(--gold);font-style:normal;font-size:.6em;vertical-align:middle;margin:0 .35em}
+.sub{font-style:italic;color:#6b4a22;font-size:14px;margin-top:2px}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:8px;margin:8px 0;
+  padding:7px 8px;background:var(--bordo);color:#fdf3da;border:1px solid var(--gold);border-radius:4px;min-height:46px}
+.bar button{flex:none;width:34px;height:32px;border:1px solid var(--gold);background:transparent;color:#fdf3da;
+  font-size:18px;border-radius:3px;cursor:pointer;font-family:inherit}
+#cur{flex:1;font-size:15px;line-height:1.25}
+#cur b{color:#f3d58a;font-variant:small-caps;letter-spacing:1px;margin-right:6px;white-space:nowrap}
+.tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:8px 0 12px}
+.tools button{font-family:inherit;font-size:14px;padding:7px 12px;cursor:pointer;color:var(--bordo);
+  background:var(--cell);border:1.5px solid var(--bordo);border-radius:3px}
+.tools button:hover{background:var(--hl)}
+.tools button.warn{background:var(--bordo);color:#fff}
+#prog{font-variant:small-caps;letter-spacing:1px;color:var(--bordo);font-weight:bold;margin-left:6px}
+main{display:flex;flex-direction:column;align-items:center;gap:16px}
+.gridwrap{flex:none;padding:5px;border:2px solid var(--bordo);background:var(--parch);
+  box-shadow:0 0 0 3px var(--parch),0 0 0 4.5px var(--gold)}
+#grid{position:relative;display:grid;grid-template-columns:repeat(23,var(--s));grid-auto-rows:var(--s);
+  user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.c{position:relative;background:var(--cell);outline:1px solid var(--line);outline-offset:-.5px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--bordo);
+  font-size:calc(var(--s)*.58);line-height:1;padding-top:calc(var(--s)*.14)}
+.c i{position:absolute;left:1.5px;top:1px;font:normal calc(var(--s)*.27)/1 Arial,Helvetica,sans-serif;color:var(--bordo);pointer-events:none}
+.c.hl{background:var(--hl)}
+.c.act{background:var(--act)}
+.c.bad{color:var(--bad);background:#fbd9d3}
+.c.bad.act{background:#f2b0a4}
+.c.rev{color:#1f5f3a}
+#inp{position:absolute;width:var(--s);height:var(--s);left:0;top:0;opacity:0;border:0;padding:0;margin:0;
+  font-size:16px;pointer-events:none;background:transparent;color:transparent;caret-color:transparent}
+.clues{display:grid;grid-template-columns:1fr;gap:14px;width:100%;max-width:720px}
+.clues h2{margin:0 0 4px;color:var(--bordo);font-variant:small-caps;font-size:19px;letter-spacing:2px;border-bottom:1px solid var(--gold)}
+.clues ul{list-style:none;margin:0;padding:0}
+.clues li{padding:4px 6px;font-size:14.5px;line-height:1.3;cursor:pointer;border-radius:3px}
+.clues li b{color:var(--bordo)}
+.clues li em{font-style:normal;opacity:.6}
+.clues li.cur{background:var(--hl);box-shadow:inset 3px 0 0 var(--bordo)}
+.clues li.ok{text-decoration:line-through;opacity:.55}
+#bravo{position:absolute;z-index:4;transform:translate(-50%,-135%) scale(.6);opacity:0;pointer-events:none;white-space:nowrap;
+  background:var(--bordo);color:#fdf3da;border:2px solid var(--gold);border-radius:16px;padding:6px 16px;
+  font-style:italic;font-weight:bold;font-size:20px;box-shadow:0 3px 10px rgba(59,36,18,.35)}
+#bravo:after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-8px;border:8px solid transparent;border-bottom:0;border-top-color:var(--gold)}
+#bravo.on{animation:bravo 1.8s ease-out}
+@keyframes bravo{0%{opacity:0;transform:translate(-50%,-110%) scale(.6)}12%{opacity:1;transform:translate(-50%,-135%) scale(1.08)}22%{transform:translate(-50%,-135%) scale(1)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-160%) scale(1)}}
+#done{display:none;text-align:center;margin:10px auto;padding:12px;max-width:720px;border:2px solid var(--gold);
+  background:var(--cell);color:var(--bordo);font-style:italic;font-size:18px}
+#done.on{display:block}
+footer{text-align:center;font-size:12px;color:#6b4a22;margin-top:16px;font-style:italic}
+@media (min-width:1000px){
+  :root{--s:clamp(22px, calc((100vw - 470px) / 23), 30px)}
+  .page{padding:18px 22px 30px}
+  main{flex-direction:row;align-items:flex-start;justify-content:center;gap:22px}
+  .clues{flex:1;max-width:440px;max-height:calc(var(--s) * 23 + 14px);overflow:auto;padding-right:6px}
+}
+@media print{
+  :root{--s:7mm}
+  @page{size:A4;margin:10mm}
+  body,.page{background:#fff}
+  .page{border:0;padding:0;min-height:0}
+  .bar,.tools,#done,#inp,#bravo,footer{display:none!important}
+  main{flex-direction:column;align-items:center;gap:5mm}
+  .c,.c.hl,.c.act,.c.bad{background:#fff;color:#000}
+  .gridwrap{box-shadow:none;border:0;padding:0}
+  .clues{grid-template-columns:1fr 1fr;max-width:none;max-height:none;overflow:visible;gap:8mm}
+  .clues li{font-size:8.5pt;padding:1px 0}
+  .clues li.cur{background:none;box-shadow:none}
+  .clues li.ok{text-decoration:none;opacity:1}
+  h1{font-size:22pt}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1><span>❦</span>Potop<span>❦</span></h1>
+    <div class="sub">Anno Domini 1655 · krzyżówka dla miłośników Trylogii</div>
+  </header>
+  <div class="bar">
+    <button id="prev" aria-label="Poprzednie hasło">‹</button>
+    <div id="cur">Kliknij pole lub pytanie, aby zacząć.</div>
+    <button id="next" aria-label="Następne hasło">›</button>
+  </div>
+  <div class="tools">
+    <button id="bCheck">Sprawdź</button>
+    <button id="bLetter">Odkryj literę</button>
+    <button id="bWord">Odkryj hasło</button>
+    <button id="bClear">Wyczyść</button>
+    <button id="bPrint">Drukuj</button>
+    <span id="prog"></span>
+  </div>
+  <div id="done">Vivat! Krzyżówka rozwiązana – wszystkie 30 haseł poprawne.</div>
+  <main>
+    <div class="gridwrap"><div id="grid"><input id="inp" type="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" aria-label="Wpisz literę"><div id="bravo" role="status" aria-live="polite">Brawo!</div></div></div>
+    <div class="clues">
+      <section><h2>Poziomo</h2><ul id="listA"></ul></section>
+      <section><h2>Pionowo</h2><ul id="listD"></ul></section>
+    </div>
+  </main>
+  <footer>Pisanie: klawiatura · strzałki – ruch · Tab – następne hasło · ponowne kliknięcie pola – zmiana kierunku</footer>
+</div>
+<script>
+(function(){
+'use strict';
+var H=23, W=23, KEY='potop-krzyzowka-v1';
+var WORDS=[{"n": 1, "d": "A", "r": 0, "c": 12, "l": 7, "t": "Onufry, szlachcic-gawędziarz herbu Wczele"}, {"n": 4, "d": "A", "r": 1, "c": 2, "l": 8, "t": "Filmowy Wołodyjowski"}, {"n": 6, "d": "A", "r": 2, "c": 13, "l": 6, "t": "Karol X …, król Szwecji"}, {"n": 9, "d": "A", "r": 4, "c": 0, "l": 11, "t": "Pułkownik, który przypalał Kmicica ogniem"}, {"n": 11, "d": "A", "r": 4, "c": 16, "l": 7, "t": "Imię Kmicica"}, {"n": 12, "d": "A", "r": 6, "c": 9, "l": 10, "t": "Odtwórca roli Kmicica"}, {"n": 14, "d": "A", "r": 8, "c": 9, "l": 9, "t": "Wielkie działo wysadzone przez Kmicica"}, {"n": 17, "d": "A", "r": 10, "c": 8, "l": 11, "t": "Zagrał księcia Bogusława"}, {"n": 19, "d": "A", "r": 12, "c": 6, "l": 11, "t": "Autor powieści, noblista"}, {"n": 21, "d": "A", "r": 14, "c": 0, "l": 9, "t": "Ród hetmana Janusza i księcia Bogusława"}, {"n": 22, "d": "A", "r": 14, "c": 10, "l": 11, "t": "Miasto u stóp Jasnej Góry"}, {"n": 26, "d": "A", "r": 17, "c": 6, "l": 13, "t": "Zaścianek Butrymów spalony przez Kmicica"}, {"n": 27, "d": "A", "r": 19, "c": 6, "l": 4, "t": "Imię Kowalskiego, osiłka „spokrewnionego” z Zagłobą"}, {"n": 28, "d": "A", "r": 20, "c": 13, "l": 8, "t": "Ojciec Kosmy i Damiana („Ociec, prać?”)"}, {"n": 29, "d": "A", "r": 21, "c": 2, "l": 7, "t": "Reżyser „Potopu” (1974)"}, {"n": 2, "d": "D", "r": 0, "c": 17, "l": 7, "t": "Odtwórczyni roli Oleńki"}, {"n": 3, "d": "D", "r": 0, "c": 20, "l": 6, "t": "Zagrał Janusza Radziwiłła"}, {"n": 5, "d": "D", "r": 1, "c": 3, "l": 9, "t": "Wojewoda poznański, który poddał Wielkopolskę Szwedom"}, {"n": 7, "d": "D", "r": 3, "c": 6, "l": 12, "t": "„Mały rycerz”"}, {"n": 8, "d": "D", "r": 3, "c": 22, "l": 6, "t": "Miejsce kapitulacji pospolitego ruszenia w 1655 r."}, {"n": 9, "d": "D", "r": 4, "c": 0, "l": 9, "t": "Jan …, król Polski w czasie potopu"}, {"n": 10, "d": "D", "r": 4, "c": 14, "l": 5, "t": "Nagroda, do której film nominowano w 1975 r."}, {"n": 13, "d": "D", "r": 6, "c": 11, "l": 13, "t": "Nazwisko rodowe Oleńki"}, {"n": 15, "d": "D", "r": 8, "c": 20, "l": 9, "t": "Filmowy Zagłoba"}, {"n": 16, "d": "D", "r": 10, "c": 2, "l": 8, "t": "Tu Radziwiłł podpisał ugodę ze Szwedami"}, {"n": 18, "d": "D", "r": 11, "c": 4, "l": 8, "t": "Przybrane nazwisko Kmicica"}, {"n": 20, "d": "D", "r": 13, "c": 18, "l": 8, "t": "Przeor, dowódca obrony Jasnej Góry"}, {"n": 23, "d": "D", "r": 16, "c": 7, "l": 6, "t": "Wierny wachmistrz Kmicica"}, {"n": 24, "d": "D", "r": 16, "c": 13, "l": 7, "t": "Majątek Oleńki"}, {"n": 25, "d": "D", "r": 16, "c": 15, "l": 6, "t": "Szwedzki generał oblegający Jasną Górę"}];
+var SOL=(function(x){
+  var b=atob(x.split('').reverse().join('')), a=new Uint8Array(b.length);
+  for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);
+  return Array.from(new TextDecoder().decode(a));
+})('==gLu4iLu4iLu4SWu4iLu4iLu4iLu4iLu4iLu4iLu4iUuQlLu4iLOFUTGZ0TI5iLu4iWDlETNVUSL5iLu4iLL5iLu4iLu4iLu4iLL5iLM5yTu4iLIN0TS5iLu4iLu4iLu4yQu4CTuQkLB5iLuIlLuolLu4iLu4iLuUkWDl0VPRlTP1UgF/0VuMkLZ5iLu4iWuQkLu0kLX5yVu4iLT5iLJ5iTu4iLuIlLS5iLu4iLuM5wu4iLu4iLO5SQu4iLuE0VPh0QPR1UYSsWD5SgFHYxJdVSaRUQS5iLJ5ySu4iLu4iLD5iLu4ySuIkLK5iLu4iTu4iLaNUSXVUSL5URJNlLB5SRuolLugkLu4iLu4iLuclLu4iLX5iQukkLS5iLD5SSLN1gFnlWTVETFRlLP5iLuskLF5iLJ5iLu4iLu4iLM5iLu4iSu4SSu4SSF5yVu4SQOllUCVFTPtkLuklLuskLu0USu4iLu4iLuEkLukkLu4iLE5iLT5iLJNkLu4SSLNFSDllUCx0Tu4yTu4ygF7iLapZxuEkLuUkLuMlLu4iLu4iLBWsLukkLuEkSFplUE5UQu8kLu4SSLN1VP5USMtUVLVlLD5iLV5iLu4iLu4iLu4yVu4SQu4iLu4ygF7yVBR1UVdkLu4iLu4iLu4CUu4iLu4SQu4iUu4iLu4iLuk0SDlkTN9UgF7iLu4CSuEkQPFYxHFkWu4iLu4iLu4iLu4iL');
+var LETTER=/^[A-ZĄĆĘŁŃÓŚŹŻ]$/;
+var grid=document.getElementById('grid'), inp=document.getElementById('inp');
+var cells={}, cellWords={}, val={}, rev={};
+var active=null, dir='A', curWord=-1;
+
+function k(r,c){return r+','+c}
+function sol(r,c){return SOL[r*W+c]}
+function wordCells(w){var a=[];for(var i=0;i<w.l;i++)a.push(w.d==='A'?[w.r,w.c+i]:[w.r+i,w.c]);return a}
+
+// --- budowa siatki i list pytań
+WORDS.forEach(function(w,wi){
+  wordCells(w).forEach(function(p){
+    var id=k(p[0],p[1]); (cellWords[id]=cellWords[id]||{})[w.d]=wi;
+  });
+});
+for(var r=0;r<H;r++)for(var c=0;c<W;c++){
+  if(sol(r,c)==='.')continue;
+  var d=document.createElement('div'); d.className='c';
+  d.style.gridRow=r+1; d.style.gridColumn=c+1; d.dataset.r=r; d.dataset.c=c;
+  d.appendChild(document.createElement('span'));
+  grid.appendChild(d); cells[k(r,c)]=d;
+}
+WORDS.forEach(function(w,wi){
+  var cell=cells[k(w.r,w.c)];
+  if(!cell.querySelector('i')){var n=document.createElement('i');n.textContent=w.n;cell.insertBefore(n,cell.firstChild)}
+  var li=document.createElement('li'); li.dataset.w=wi;
+  li.innerHTML='<b>'+w.n+'.</b> '+w.t+' <em>('+w.l+')</em>';
+  document.getElementById(w.d==='A'?'listA':'listD').appendChild(li);
+  w.li=li;
+});
+
+// --- stan
+function save(){try{localStorage.setItem(KEY,JSON.stringify({v:val,r:rev}))}catch(e){}}
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s){val=s.v||{};rev=s.r||{}}}catch(e){}}
+function paint(id){
+  var el=cells[id]; el.querySelector('span').textContent=val[id]||'';
+  el.classList.toggle('rev',!!rev[id]);
+}
+function wordOk(w){return wordCells(w).every(function(p){return val[k(p[0],p[1])]===sol(p[0],p[1])})}
+function bravo(w){
+  var b=document.getElementById('bravo'), cs=wordCells(w), m=cells[k(cs[cs.length>>1][0],cs[cs.length>>1][1])];
+  var x=m.offsetLeft+m.offsetWidth/2, gw=grid.offsetWidth;
+  b.style.left=Math.max(50,Math.min(gw-50,x))+'px'; b.style.top=Math.max(m.offsetTop,cells[k(cs[0][0],cs[0][1])].offsetTop)+'px';
+  if(w.d==='D')b.style.top=cells[k(cs[0][0],cs[0][1])].offsetTop+'px';
+  b.classList.remove('on'); void b.offsetWidth; b.classList.add('on');
+}
+function refresh(cheer){
+  var n=0, fresh=null;
+  WORDS.forEach(function(w){var ok=wordOk(w); if(ok)n++; if(ok&&!w.ok)fresh=w; w.ok=ok; w.li.classList.toggle('ok',ok)});
+  if(cheer&&fresh)bravo(fresh);
+  document.getElementById('prog').textContent='Postęp: '+n+' / '+WORDS.length;
+  document.getElementById('done').classList.toggle('on',n===WORDS.length);
+}
+function setVal(id,ch,isRev){
+  if(ch)val[id]=ch; else delete val[id];
+  if(isRev)rev[id]=1; else delete rev[id];
+  cells[id].classList.remove('bad'); paint(id);
+}
+
+// --- zaznaczenie
+function select(r,c,d,noFocus){
+  var id=k(r,c), cw=cellWords[id]; if(!cw)return;
+  if(d && cw[d]!==undefined)dir=d; else if(cw[dir]===undefined)dir=dir==='A'?'D':'A';
+  active=[r,c]; curWord=cw[dir];
+  Object.keys(cells).forEach(function(i){cells[i].classList.remove('hl','act')});
+  WORDS.forEach(function(w){w.li.classList.remove('cur')});
+  var w=WORDS[curWord];
+  wordCells(w).forEach(function(p){cells[k(p[0],p[1])].classList.add('hl')});
+  cells[id].classList.add('act');
+  w.li.classList.add('cur');
+  if(w.li.parentNode.closest('.clues').scrollHeight>w.li.parentNode.closest('.clues').clientHeight+2){
+    var box=w.li.closest('.clues'), t=w.li.offsetTop-box.offsetTop;
+    if(t<box.scrollTop||t+w.li.offsetHeight>box.scrollTop+box.clientHeight)box.scrollTop=t-box.clientHeight/3;
+  }
+  document.getElementById('cur').innerHTML='<b>'+w.n+' '+(w.d==='A'?'poziomo':'pionowo')+'</b>'+w.t+' ('+w.l+')';
+  inp.style.left=cells[id].offsetLeft+'px'; inp.style.top=cells[id].offsetTop+'px';
+  if(!noFocus){inp.value=' ';inp.focus({preventScroll:true})}
+}
+function selectWord(wi,noFocus){
+  var w=WORDS[wi], cs=wordCells(w), t=cs[0];
+  select(t[0],t[1],w.d,noFocus);
+}
+function stepInWord(delta){
+  var w=WORDS[curWord], i=w.d==='A'?active[1]-w.c:active[0]-w.r, j=i+delta;
+  if(j<0||j>=w.l)return false;
+  var p=wordCells(w)[j]; select(p[0],p[1],w.d); return true;
+}
+function move(dr,dc){
+  if(!active)return;
+  var r=active[0]+dr,c=active[1]+dc;
+  while(r>=0&&r<H&&c>=0&&c<W){ if(cells[k(r,c)]){select(r,c,dc?'A':'D');return} r+=dr;c+=dc }
+}
+function type(ch){
+  if(!active)return;
+  setVal(k(active[0],active[1]),ch,false); save(); refresh(true); stepInWord(1);
+}
+function backspace(){
+  if(!active)return;
+  var id=k(active[0],active[1]);
+  if(val[id]){setVal(id,'',false)}
+  else if(stepInWord(-1)){setVal(k(active[0],active[1]),'',false)}
+  save(); refresh();
+}
+
+// --- zdarzenia
+grid.addEventListener('click',function(e){
+  var el=e.target.closest('.c'); if(!el)return;
+  var r=+el.dataset.r,c=+el.dataset.c,cw=cellWords[k(r,c)];
+  if(active&&active[0]===r&&active[1]===c&&cw.A!==undefined&&cw.D!==undefined)select(r,c,dir==='A'?'D':'A');
+  else select(r,c);
+});
+document.querySelector('.clues').addEventListener('click',function(e){
+  var li=e.target.closest('li'); if(li)selectWord(+li.dataset.w);
+});
+inp.addEventListener('keydown',function(e){
+  if(e.ctrlKey||e.metaKey)return;
+  switch(e.key){
+    case 'ArrowLeft':move(0,-1);break; case 'ArrowRight':move(0,1);break;
+    case 'ArrowUp':move(-1,0);break; case 'ArrowDown':move(1,0);break;
+    case 'Backspace':backspace();break;
+    case 'Delete':if(active){setVal(k(active[0],active[1]),'',false);save();refresh()}break;
+    case 'Tab':selectWord((curWord+(e.shiftKey?-1:1)+WORDS.length)%WORDS.length);break;
+    case 'Enter':case ' ':if(active)select(active[0],active[1],dir==='A'?'D':'A');break;
+    default:return;
+  }
+  e.preventDefault();
+});
+inp.addEventListener('input',function(e){
+  if(e.isComposing)return;
+  var v=inp.value; inp.value=' ';
+  if(v.length===0){backspace();return}
+  Array.from(v).forEach(function(ch){
+    ch=ch.toLocaleUpperCase('pl'); if(LETTER.test(ch))type(ch);
+  });
+});
+document.getElementById('prev').onclick=function(){selectWord((Math.max(curWord,0)-1+WORDS.length)%WORDS.length)};
+document.getElementById('next').onclick=function(){selectWord((curWord+1)%WORDS.length)};
+document.getElementById('bCheck').onclick=function(){
+  var bad=0;
+  Object.keys(cells).forEach(function(id){
+    var p=id.split(','), wrong=!!val[id]&&val[id]!==sol(+p[0],+p[1]);
+    cells[id].classList.toggle('bad',wrong); if(wrong)bad++;
+  });
+  if(active)inp.focus({preventScroll:true});
+};
+document.getElementById('bLetter').onclick=function(){
+  if(!active){selectWord(0);}
+  setVal(k(active[0],active[1]),sol(active[0],active[1]),true); save(); refresh(); stepInWord(1);
+};
+document.getElementById('bWord').onclick=function(){
+  if(curWord<0)selectWord(0);
+  wordCells(WORDS[curWord]).forEach(function(p){
+    var id=k(p[0],p[1]); if(val[id]!==sol(p[0],p[1]))setVal(id,sol(p[0],p[1]),true);
+  });
+  save(); refresh(); inp.focus({preventScroll:true});
+};
+(function(){
+  var b=document.getElementById('bClear'), t=null;
+  b.onclick=function(){
+    if(!t){b.textContent='Na pewno?';b.classList.add('warn');
+      t=setTimeout(function(){b.textContent='Wyczyść';b.classList.remove('warn');t=null},3000);return}
+    clearTimeout(t);t=null;b.textContent='Wyczyść';b.classList.remove('warn');
+    val={};rev={};Object.keys(cells).forEach(function(id){cells[id].classList.remove('bad');paint(id)});
+    save();refresh();
+  };
+})();
+document.getElementById('bPrint').onclick=function(){window.print()};
+
+load(); Object.keys(cells).forEach(paint); refresh();
+})();
+</script>
+</body>
+</html>

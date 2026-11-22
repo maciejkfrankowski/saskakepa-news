@@ -1,0 +1,68 @@
+# Katalog źródeł. Pełna lista kandydatów: docs/02-zrodla.md
+# adapter: rss | html_links | tribe_events
+#   html_links: wymaga link_pattern (regex na pełnym URL wpisu); opcje: strip, require_date, events
+#   tribe_events: REST API kalendarza WordPress (wydarzenia z terminem)
+# opcje wspólne: enabled (false = pomiń), exclude_title (regex – pomija wpisy o takim tytule),
+#   include (regex lub lista regexów – zostają tylko wpisy, których tytuł lub zajawka pasuje)
+
+# Słowa-klucze Saskiej Kępy dla źródeł dzielnicowych (wielkość liter bez znaczenia; to regexy,
+# więc „sask\w+ kęp” łapie też „Saskiej Kępie”). Dopisuj ulice i miejsca według potrzeb.
+okolica: &okolica
+  - 'sask\w+ kęp'
+  - '\bkęp(a|y|ie|ę|ą)\b'
+  - '(ul\.|ulic\w+)\s+(sask|francusk|parysk|zwycięzców|walecznych|brukselsk|egipsk|ateńsk|londyńsk|katowick|berezyńsk|międzynarodow|obrońców|genewsk|lipsk|dąbrowieck|estońsk|irlandzk|nobla|styki|jakubowsk|finlandzk)'
+  - '(francuskiej|paryskiej|zwycięzców|walecznych|brukselskiej|egipskiej|saskiej|ateńskiej)\s+\d'
+  - 'skaryszewsk'
+  - 'rond\w+ waszyngtona'
+  - 'wał\w* miedzeszyńsk'
+  - '(tras\w+|mo(st|ści)\w*) łazienkowsk'
+  - 'mo(st|ści)\w* (ks\. |księcia )?(j\. |józefa )?poniatowskiego'
+  - '(pge|stadion\w*) narodow'
+  - 'prom\w* kultury'
+
+sources:
+  - id: prom
+    name: PROM Kultury Saska Kępa
+    category: kultura
+    adapter: rss
+    url: https://promkultury.pl/feed/
+    home: https://promkultury.pl
+
+  - id: prom-wydarzenia
+    name: PROM Kultury – repertuar
+    category: kultura
+    adapter: html_links
+    url: https://promkultury.pl/        # strona główna pokazuje 6 najbliższych; /wydarzenia/ to kalendarz bez listy
+    link_pattern: 'promkultury\.pl/wydarzenie/[^/?#]+/?$'
+    events: true                        # termin z listy: „21.11.2026, 19:00”
+    home: https://promkultury.pl/wydarzenia/
+
+  - id: urzad
+    name: Urząd Dzielnicy Praga-Południe
+    category: dzielnica
+    adapter: html_links
+    url: https://pragapld.um.warszawa.pl/aktualnosci
+    link_pattern: 'pragapld\.um\.warszawa\.pl/-/[^/?#]+$'
+    require_date: true
+    strip: ['\bArtykuł\b', 'źródło:\s*pragapld\.um\.warszawa\.pl']
+    include: *okolica                   # urząd pisze o całej dzielnicy; bez filtra: usuń tę linię
+    home: https://pragapld.um.warszawa.pl
+
+  - id: narodowy
+    name: PGE Narodowy
+    category: okolica
+    adapter: rss
+    url: https://feeds.feedburner.com/stadionnarodowy
+    exclude_title: '\[(galeria|fotorelacja|zdjęcia|wideo)|zobacz zdjęcia'   # relacje po imprezach
+    home: https://www.pgenarodowy.pl
+
+  - id: policja
+    name: Policja – KRP Warszawa VII (Praga-Południe)
+    category: bezpieczenstwo
+    adapter: html_links
+    url: https://praga-poludnie.policja.gov.pl/r7/aktualnosci
+    # tylko wpisy własne komendy; lista zawiera też komunikaty KSP i policja.pl
+    link_pattern: 'praga-poludnie\.policja\.gov\.pl/r7/aktualnosci/\d+,[^/?#]+\.html$'
+    require_date: true
+    include: *okolica
+    home: https://praga-poludnie.policja.gov.pl

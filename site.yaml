@@ -1,0 +1,40 @@
+lang: pl
+title: Saska Kępa
+subtitle: LokalOS
+tagline: Wiadomości i rozrywka z Saskiej Kępy
+description: Codziennie aktualizowany przegląd lokalnych wiadomości z Saskiej Kępy w Warszawie.
+# contact_email: adres@domena.pl   # po wpisaniu pojawi się blok „Napisz do nas”
+contact_text: Masz pytanie, pomysł lub problem? Wspólnie tworzymy lepszą Saską Kępę.
+source_images: true   # miniatury ze stron źródłowych (wyświetlane z serwera źródła); false = same ilustracje
+bot_url: https://github.com/maciejkfrankowski/saskakepa-news
+tabbar: [kultura, dzielnica]   # dwie kategorie w dolnym pasku na telefonie
+weather: {lat: 52.232, lon: 21.055}
+
+categories:
+  - {slug: kultura, name: Kultura, icon: ticket, color: "#8a3ffc"}
+  - {slug: dzielnica, name: Dzielnica, icon: building, color: "#1557d6"}
+  - {slug: okolica, name: Stadion i okolica, short: Okolica, icon: pin, color: "#b45309"}
+  - {slug: bezpieczenstwo, name: Bezpieczeństwo, icon: shield, color: "#c2410c"}
+  - {slug: redakcja, name: Od redakcji, icon: pen, color: "#173b2a", nav: false}
+
+# Karta „Partner lokalny · Reklama” na stronie głównej (wyłączona; enabled: true włącza)
+# url: dokąd prowadzi karta (bez url przycisk otwiera e-mail kontaktowy); image: ścieżka w static/
+ad:
+  enabled: false
+  name: Ares Pet Food
+  text: Kiełbaski dla psów.
+  cta: Zobacz ofertę
+  url: https://www.arespetfood.com
+  image: static/img/ad-pies.svg
+  image_alt: Uśmiechnięty pies
+
+# Blok „Przydatne” na stronie głównej: stałe skróty dla mieszkańców (icon: nazwy z templates/_macros.html)
+useful:
+  - {label: PROM Kultury, note: Repertuar i bilety, icon: ticket, url: "https://promkultury.pl/wydarzenia/"}
+  - {label: Kino Kępa, note: Seanse przy Brukselskiej, icon: ticket, url: "https://promkultury.pl/kino-kepa/"}
+  - {label: Urząd Dzielnicy, note: Praga-Południe, icon: building, url: "https://pragapld.um.warszawa.pl"}
+  - {label: Wizyta w urzędzie, note: Rezerwacja terminu, icon: calendar, url: "https://rezerwacje.um.warszawa.pl/"}
+  - {label: Odpady, note: Warszawa 19115, icon: trash, url: "https://warszawa19115.pl/wszystko-o-odpadach"}
+  - {label: Komunikacja miejska, note: Zmiany w kursowaniu, icon: bus, url: "https://www.wtp.waw.pl/zmiany/"}
+  - {label: PGE Narodowy, note: Kalendarz imprez, icon: pin, url: "https://www.pgenarodowy.pl/wydarzenia/kalendarium-wydarzen"}
+  - {label: Policja, note: KRP Praga-Południe, icon: shield, url: "https://praga-poludnie.policja.gov.pl"}
