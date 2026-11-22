@@ -4,10 +4,10 @@
   "name": "PROM Kultury Saska Kępa",
   "url": "https://promkultury.pl/feed/",
   "home": "https://promkultury.pl",
-  "checked_at": "2026-11-22T18:41:06+00:00",
+  "checked_at": "2026-11-22T18:44:30+00:00",
   "ok": true,
   "found": 10,
-  "added": 10,
+  "added": 0,
   "error": ""
  },
  {
@@ -15,10 +15,10 @@
   "name": "PROM Kultury – repertuar",
   "url": "https://promkultury.pl/",
   "home": "https://promkultury.pl/wydarzenia/",
-  "checked_at": "2026-11-22T18:41:08+00:00",
+  "checked_at": "2026-11-22T18:44:31+00:00",
   "ok": true,
   "found": 6,
-  "added": 6,
+  "added": 0,
   "error": ""
  },
  {
@@ -26,21 +26,21 @@
   "name": "Urząd Dzielnicy Praga-Południe",
   "url": "https://pragapld.um.warszawa.pl/aktualnosci",
   "home": "https://pragapld.um.warszawa.pl",
-  "checked_at": "2026-11-22T18:41:08+00:00",
+  "checked_at": "2026-11-22T18:44:32+00:00",
   "ok": false,
   "found": 0,
   "added": 0,
-  "error": "0 wpisów – sprawdź strukturę strony"
+  "error": "https://pragapld.um.warszawa.pl/aktualnosci: 403 Client Error: Forbidden for url: https://pragapld.um.warszawa.pl/aktualnosci"
  },
  {
   "id": "narodowy",
   "name": "PGE Narodowy",
   "url": "https://feeds.feedburner.com/stadionnarodowy",
   "home": "https://www.pgenarodowy.pl",
-  "checked_at": "2026-11-22T18:41:09+00:00",
+  "checked_at": "2026-11-22T18:44:41+00:00",
   "ok": true,
   "found": 6,
-  "added": 6,
+  "added": 0,
   "error": ""
  },
  {
@@ -48,11 +48,11 @@
   "name": "Policja – KRP Warszawa VII (Praga-Południe)",
   "url": "https://praga-poludnie.policja.gov.pl/r7/aktualnosci",
   "home": "https://praga-poludnie.policja.gov.pl",
-  "checked_at": "2026-11-22T18:41:10+00:00",
+  "checked_at": "2026-11-22T18:44:41+00:00",
   "filtered": true,
   "ok": true,
   "found": 1,
-  "added": 1,
+  "added": 0,
   "error": ""
  }
 ]
