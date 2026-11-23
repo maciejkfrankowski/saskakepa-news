@@ -68,9 +68,10 @@ more_news: Wszystkie wiadomości
 
 # Ilustracje tematyczne dla wpisów bez zdjęcia: temat -> wyrażenie regularne szukane w tytule
 # (kolejność ma znaczenie – wygrywa pierwszy pasujący temat; brak dopasowania = kafelek kategorii).
-photo_label: Zdjęcie ilustracyjne
-photo_pool: Pula zdjęć ilustracyjnych (temat i liczba plików)
+photo_label: Ilustracja AI
+photo_pool: Pula ilustracji AI (temat i liczba plików)
 topics:
+  boar: '\b(dzik(i|a|ów|om|ami|iem|u|ach)?\b|odłów|odstrzał|\basf\b|afrykański\w* pomór)'
   swim: '\b(pływaln|basen)'
   train: '\b(pociąg|kolej|wkd|pkp|dworc|dworz|peron)'
   bus: '\b(autobus|lini[aei]|rozkład|przystan|gpa|komunikacj|transportow)'

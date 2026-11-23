@@ -89,11 +89,11 @@ z seedem `data:poziom`, więc w danym dniu plansze są stałe. Każda ma dokład
 - Pogoda (Open-Meteo) i wyszukiwarka działają w przeglądarce; brak newslettera i formularzy.
 - Policja (KSP) nie jest podłączona: strona z filtrem jednostki nie dała się odczytać – do ustalenia adres.
 
-## Pula zdjęć ilustracyjnych (od 2026-11-22)
-Zdjęcia tematyczne (obecnie z Pixabay, lista źródeł w `zrodla.csv` w tym samym folderze) przejrzane przez redakcję leżą w
+## Pula ilustracji AI (od 2026-11-22)
+Obrazy tematyczne wygenerowane przez AI (114 plików, 19 grup; od 23.11 zamiast zdjęć z Pixabay) przejrzane przez redakcję leżą w
 `static/img/topics-photo/<temat>-<n>.jpg`. `gn/build.py` grupuje je po temacie, zmniejsza do WebP 800 px
 (tylko w `dist/`) i przypisuje wpisom bez własnego zdjęcia i bez miniatury ze źródła; brak tematu → grupa
 `general`; brak plików → rysowana ilustracja SVG. Wśród kart widocznych razem na stronie głównej zdjęcie nie może się
 powtórzyć: wpis dostaje kolejne wolne zdjęcie z tematu, potem z `general`, a gdy ich zabraknie – ilustrację SVG.
-Na listach kategorii powtórki są dopuszczalne, ale nie zaraz po sobie. Każde takie zdjęcie ma podpis „Zdjęcie ilustracyjne” (de: „Symbolbild”).
+Na listach kategorii powtórki są dopuszczalne, ale nie zaraz po sobie. Każde takie zdjęcie ma podpis „Ilustracja AI” (de: „KI-Bild”).
 Opis scen i zasady: `docs/03-pula-zdjec-ai.md`. Folder należy do treści repo – paczki z kodem go nie nadpisują.

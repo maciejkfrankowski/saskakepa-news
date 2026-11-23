@@ -1,17 +1,15 @@
-# Pula zdjęć ilustracyjnych — instrukcja i opisy scen (2026-11-22)
+# Pula ilustracji AI — instrukcja i opisy scen (2026-11-23)
 
-> **Aktualizacja 22.11.2026:** pula powstała ze zdjęć z Pixabay, a nie z generatora AI (decyzja Marka).
-> Dlatego podpis na kartach brzmi „Zdjęcie ilustracyjne” (Boppard: „Symbolbild”), a nie „Ilustracja AI”.
-> Stan: 94 zdjęcia po przeglądzie (z 108 odrzucono 14: rozpoznawalne miejsca, logo, okładki, dzieła sztuki,
-> dziecko, barwy narodowe); lista źródeł i autorów w `zrodla.csv` obok zdjęć. Licencja Pixabay nie wymaga
-> podpisu autora, ale nie obejmuje praw osób trzecich (marki, dzieła, wizerunek) – stąd zasady treści poniżej.
-> Słabsze grupy do uzupełnienia: `general` i `council` (po 4 zdjęcia). Zdjęcia mają 640×400 px – na dużych
-> kartach będą nieostre; docelowo pobrać wersje 1280 px. Opisy scen poniżej służą jako wzorzec doboru zdjęć
-> (albo prompty, gdyby pula była kiedyś generowana).
+> **Stan 23.11.2026:** pula składa się ze 114 obrazów wygenerowanych przez AI według scen z tego dokumentu
+> (19 grup po 6: 17 tematów, `general` i nowa grupa `boar` – dziki). Zastąpiła zdjęcia z Pixabay używane
+> 22–23.11; plik `zrodla.csv` został usunięty. Podpis na kartach: „Ilustracja AI” (Boppard: „KI-Bild”).
+> Przegląd 23.11: wszystkie 114 obrazów bez napisów, logo, twarzy i rozpoznawalnych miejsc.
+> Obrazy mają 640×400 px – na dużych kartach będą nieostre; docelowo wygenerować w 1280 px.
+> Grupa `boar` nie ma rysowanej ilustracji zapasowej (gdy zabraknie wolnych zdjęć, karta dostaje ikonę kategorii).
 
 Wariant 1 z `08-ilustracje-ai-architektura.md`: jednorazowo wygenerowana pula fotorealistycznych zdjęć
 tematycznych, wspólna dla serwisów Grodzisk, Saska Kępa i Boppard. Zdjęcie z puli pojawia się na karcie
-wpisu **tylko wtedy, gdy wpis nie ma własnego zdjęcia ani miniatury ze źródła**, i zawsze z podpisem „Zdjęcie ilustracyjne”.
+wpisu **tylko wtedy, gdy wpis nie ma własnego zdjęcia ani miniatury ze źródła**, i zawsze z podpisem „Ilustracja AI”.
 
 ## Jak to działa
 
@@ -25,7 +23,7 @@ flowchart LR
     E -- nie --> G{Temat rozpoznany w tytule?}
     G -- tak --> H[Zdjęcie z grupy tematu]
     G -- nie --> I[Zdjęcie z grupy general]
-    H --> J[Karta z podpisem „Zdjęcie ilustracyjne”]
+    H --> J[Karta z podpisem „Ilustracja AI”]
     I --> J
 ```
 
@@ -41,10 +39,10 @@ flowchart LR
 |---|---|
 | Folder w repo | `static/img/topics-photo/` |
 | Nazwa | `<temat>-<numer>.jpg`, np. `road-1.jpg`, `general-4.jpg` (także `.jpeg`, `.png`, `.webp`) |
-| Temat w nazwie | dokładnie jedna z 18 nazw z tabel poniżej, małymi literami |
+| Temat w nazwie | dokładnie jedna z 19 nazw z tabel poniżej, małymi literami |
 | Proporcje | poziome 16:9 (karta przycina środek kadru) |
 | Rozmiar | szerokość 1200–1600 px, JPG, najlepiej poniżej 500 KB — strona i tak zmniejsza do 800 px |
-| Liczba | po 6 na temat = 108 plików; można mniej lub więcej |
+| Liczba | po 6 na temat = 114 plików; można mniej lub więcej |
 
 ## Zasady treści (odrzucaj obrazy, które je łamią)
 
@@ -66,6 +64,11 @@ Wklej stały początek, potem scenę z tabeli, potem stałe zakończenie.
 `Small Central European town setting, natural light, 35mm lens, shallow depth of field, muted natural colours, landscape format 16:9. No text, no letters, no signs with writing, no logos, no flags, no recognizable faces, no uniforms with insignia.`
 
 ## Sceny
+
+### boar — dziki
+| Plik | Scena |
+|---|---|
+| boar-1…6 | a wild boar (also a sow with piglets or a small group) on a small-town street, pavement, by a fence or an overturned bin, day and night |
 
 ### road — drogi, remonty, utrudnienia
 | Plik | Scena |

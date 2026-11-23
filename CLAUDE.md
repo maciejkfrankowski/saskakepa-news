@@ -36,7 +36,7 @@ Etap: demo na darmowej infrastrukturze (GitHub Actions + Pages). Docelowo możli
 | `gn/sudoku.py`, `static/sudoku.js` | generator i gra „Sudoku dnia” |
 | `gn/build.py` | generator `dist/` |
 | `templates/`, `static/` | szablony Jinja2, CSS, JS |
-| `static/img/topics-photo/` | pula zdjęć ilustracyjnych (pliki wgrywa redakcja; opis w `docs/03-pula-zdjec-ai.md`) |
+| `static/img/topics-photo/` | pula ilustracji AI (pliki wgrywa redakcja; opis w `docs/03-pula-zdjec-ai.md`) |
 | `content/articles/` | własne artykuły (Markdown + YAML) |
 | `content/krzyzowki/` | gotowe krzyżówki jako samodzielne pliki HTML |
 | `admin/` | panel redakcji: Sveltia CMS (wersja przypięta w `index.html`), pola w `config.yml` |

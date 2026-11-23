@@ -298,8 +298,11 @@ def build() -> None:
     # zdjęcia z puli: bez powtórek wśród kart widocznych razem na stronie głównej
     visible = top + [entry for section in sections for entry in section["entries"]]
     assign_photos(pool, visible, entries + events)
+    drawn = {path.stem for path in (ROOT / "static" / "img" / "topics").glob("*.svg")}
     for entry in everything:
         entry["photo"] = published.get(entry.pop("pool_file", ""), "")
+        if entry["topic"] not in drawn:  # temat tylko ze zdjęciami (np. boar): bez rysowanej rezerwy
+            entry["topic"] = ""
     env.globals["anchors"] = {section["cat"]["slug"] for section in sections}
     env.globals["events_anchor"] = bool(events)
     render("index.html", "", hero=hero, today=today[:4], top=top, more=more, events=events[:home_events],
