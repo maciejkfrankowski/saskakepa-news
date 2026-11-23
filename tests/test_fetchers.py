@@ -4,7 +4,7 @@ import unittest
 from unittest import mock
 
 from gn import fetch
-from gn.build import photo_pool, pick_photo
+from gn.build import assign_photos, photo_pool, pick_photo
 from gn.fetch import add_images, merge
 from gn.fetchers import html_links, rss, tribe_events
 from gn.models import clean_lead
@@ -263,6 +263,23 @@ class PhotoPoolTest(unittest.TestCase):
         self.assertEqual(pick_photo(pool, "", "abc"), "general-1.webp")   # brak tematu -> grupa ogólna
         self.assertEqual(pick_photo(pool, "cinema", "abc"), "general-1.webp")
         self.assertEqual(pick_photo({}, "road", "abc"), "")
+
+    def test_no_repeats_among_visible_cards(self):
+        pool = {"bus": ["bus-1.jpg", "bus-2.jpg"], "general": ["general-1.jpg"]}
+
+        def entry(n, **extra):
+            return {"id": f"id{n}", "topic": "bus", "category": "transport", "image": "", "event_date": "", **extra}
+
+        visible = [entry(n) for n in range(4)] + [entry(9, image="https://e.org/a.jpg")]
+        others = [entry(n) for n in range(10, 16)]
+        assign_photos(pool, visible + visible[:1], others)   # wpis powtórzony na stronie liczy się raz
+        photos = [e["pool_file"] for e in visible[:4]]
+        self.assertEqual(sorted(photos[:3]), ["bus-1.jpg", "bus-2.jpg", "general-1.jpg"])  # temat, potem general
+        self.assertEqual(photos[3], "")                      # pula wyczerpana -> rysowana ilustracja
+        self.assertEqual(visible[4]["pool_file"], "")        # wpis z własnym zdjęciem
+        rest = [e["pool_file"] for e in others]
+        self.assertTrue(all(rest))
+        self.assertTrue(all(a != b for a, b in zip(rest, rest[1:])))   # dalej bez powtórek pod rząd
 
 
 class RssTest(unittest.TestCase):

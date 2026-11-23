@@ -42,10 +42,56 @@ def photo_pool(root: Path) -> dict[str, list[str]]:
     return pool
 
 
+def photo_candidates(pool: dict[str, list[str]], topic: str, key: str) -> list[str]:
+    """Zdjęcia dla wpisu w kolejności preferencji: grupa tematu, potem `general`.
+
+    Każda grupa zaczyna się od pozycji wynikającej z identyfikatora wpisu, więc wpis ma swoje
+    „ulubione” zdjęcie (to samo przy każdej budowie), a kolejne są rezerwą na wypadek powtórki.
+    """
+    start = zlib.crc32(key.encode())
+    ordered: list[str] = []
+    for group in dict.fromkeys((topic, "general")):
+        files = pool.get(group) or []
+        offset = start % len(files) if files else 0
+        ordered += files[offset:] + files[:offset]
+    return ordered
+
+
 def pick_photo(pool: dict[str, list[str]], topic: str, key: str) -> str:
-    """Zdjęcie z puli dla tematu (albo z grupy `general`); to samo dla danego wpisu przy każdej budowie."""
-    files = pool.get(topic) or pool.get("general") or []
-    return files[zlib.crc32(key.encode()) % len(files)] if files else ""
+    """Preferowane zdjęcie z puli dla wpisu (albo pusty tekst, gdy pula nie ma nic dla tematu)."""
+    return next(iter(photo_candidates(pool, topic, key)), "")
+
+
+def assign_photos(pool: dict[str, list[str]], visible: list[dict], others: list[dict]) -> None:
+    """Przypisuje wpisom zdjęcia z puli (`pool_file`); wpisy ze zdjęciem i wydarzenia zostają bez zdjęcia.
+
+    `visible` to wpisy pokazywane razem na stronie głównej: żadne zdjęcie nie może się wśród nich
+    powtórzyć. Gdy zabraknie wolnych zdjęć w temacie i w grupie `general`, wpis zostaje bez zdjęcia
+    (dostaje rysowaną ilustrację). `others` (dalsze pozycje list kategorii) mogą się powtarzać,
+    ale nie zaraz po sobie w tej samej kategorii.
+    """
+    def wanted(entry: dict) -> list[str]:
+        if entry["image"] or entry["event_date"]:
+            return []
+        return photo_candidates(pool, entry["topic"], entry.get("id") or entry["href"])
+
+    used: set[str] = set()
+    previous: dict[str, str] = {}  # ostatnie zdjęcie w kategorii
+    for entry in visible:
+        if "pool_file" in entry:  # ten sam wpis bywa na stronie dwa razy (np. „Najważniejsze” i sekcja)
+            continue
+        entry["pool_file"] = next((name for name in wanted(entry) if name not in used), "")
+        if entry["pool_file"]:
+            used.add(entry["pool_file"])
+            previous[entry["category"]] = entry["pool_file"]
+    for entry in others:
+        if "pool_file" in entry:
+            continue
+        options = wanted(entry)
+        entry["pool_file"] = next((name for name in options if name != previous.get(entry["category"])),
+                                  options[0] if options else "")
+        if entry["pool_file"]:
+            previous[entry["category"]] = entry["pool_file"]
 
 
 def publish_pool(pool: dict[str, list[str]], dist: Path) -> dict[str, str]:
@@ -194,9 +240,6 @@ def build() -> None:
             (name for name, pattern in topics if pattern.search(entry["title"])), "")
     # zdjęcie ilustracyjne z puli zastępuje rysowaną ilustrację; wpisy ze zdjęciem i wydarzenia zostają bez zmian
     pool = photo_pool(ROOT)
-    for entry in everything:
-        entry["pool_file"] = "" if entry["image"] or entry["event_date"] else pick_photo(
-            pool, entry["topic"], entry.get("id") or entry["href"])
     # Wydarzenia (z terminem) idą osobnym torem: tylko nadchodzące, od najbliższego
     events = sorted((e for e in everything if e["event_date"][:10] >= today_iso),
                     key=lambda e: e["event_date"])
@@ -225,8 +268,6 @@ def build() -> None:
     shutil.copytree(ROOT / "static", DIST / "static")
     shutil.copytree(ROOT / "admin", DIST / "admin")
     published = publish_pool(pool, DIST)
-    for entry in everything:
-        entry["photo"] = published.get(entry.pop("pool_file"), "")
     (DIST / ".nojekyll").write_text("")
 
     def render(template: str, target: str, **context) -> None:
@@ -254,6 +295,11 @@ def build() -> None:
         found = [e for e in entries if e["category"] == cat["slug"]]
         if found:
             sections.append({"cat": cat, "entries": found[:per_category], "total": len(found)})
+    # zdjęcia z puli: bez powtórek wśród kart widocznych razem na stronie głównej
+    visible = top + [entry for section in sections for entry in section["entries"]]
+    assign_photos(pool, visible, entries + events)
+    for entry in everything:
+        entry["photo"] = published.get(entry.pop("pool_file", ""), "")
     env.globals["anchors"] = {section["cat"]["slug"] for section in sections}
     env.globals["events_anchor"] = bool(events)
     render("index.html", "", hero=hero, today=today[:4], top=top, more=more, events=events[:home_events],
