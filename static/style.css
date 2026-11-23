@@ -28,7 +28,7 @@ h1, h2, h3 { font-family: var(--serif); color: var(--navy); line-height: 1.2; ma
 .logo { display: grid; grid-template-columns: auto auto; column-gap: 10px; align-items: center; color: var(--navy); }
 .logo:hover { text-decoration: none; }
 .logo-name { font: 700 2.1rem/1 var(--serif); letter-spacing: .01em; }
-.logo-sub { grid-column: 1 / -1; font-weight: 700; font-size: .9rem; color: var(--blue); }
+.logo-sub { grid-column: 2; font-weight: 700; font-size: .9rem; color: var(--blue); }
 /* cztery pionowe kreski obok nazwy */
 .bars { display: flex; gap: 3px; height: 26px; }
 .bars i { width: 5px; height: 100%; border-radius: 1px; background: var(--blue); }
@@ -154,6 +154,7 @@ th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--lin
 @media (max-width: 860px) {
   .top { flex-wrap: wrap; gap: 10px; padding-top: 12px; }
   .logo-name { font-size: 1.7rem; }
+  .logo-long .logo-name { font-size: 1.3rem; white-space: nowrap; }
   .nav { display: none; }
   .tools { width: 100%; }
   .today { justify-content: flex-start; }

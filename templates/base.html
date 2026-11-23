@@ -10,9 +10,9 @@
 </head>
 <body data-root="{{ root }}" data-no-results="{{ t.no_results }}"{% if site.weather %} data-lat="{{ site.weather.lat }}" data-lon="{{ site.weather.lon }}"{% endif %}>
 <header class="top wrap">
-  <a class="logo" href="{{ root or './' }}" aria-label="{{ site.title }} – {{ t.home_label }}">
-    <span class="logo-name">{{ site.title|upper }}</span>
+  <a class="logo{% if site.title|length > 14 %} logo-long{% endif %}" href="{{ root or './' }}" aria-label="{{ site.title }} – {{ t.home_label }}">
     <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="logo-name">{{ site.title|upper }}</span>
     <span class="logo-sub">{{ site.subtitle }}</span>
   </a>
   <nav class="nav" aria-label="{{ t.nav_main }}">

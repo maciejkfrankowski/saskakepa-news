@@ -63,7 +63,7 @@ zostaje pastelowy kafelek kategorii. Sekcja „Najważniejsze”: dwie duże kar
 reklama (jeśli włączona) jako pasek pod sekcją. Wydarzenia o tym samym tytule i terminie z jednego źródła są scalane.
 
 ## Strona główna jako całość
-Kolejność: główny blok + „dziś” → „Najważniejsze” (+ reklama) → sekcje kategorii (po 8 najnowszych wpisów, link
+Kolejność: główny blok + „dziś” → „Najważniejsze” (+ reklama) → sekcje kategorii (po 4 najnowsze wpisy; `home_per_category` w `site.yaml`, link
 „Zobacz wszystkie” do podstrony, gdy jest ich więcej) → „Przydatne” → kontakt → wydarzenia (8 najbliższych) na końcu.
 Menu i dolny pasek prowadzą do kotwic `#<slug>` na stronie głównej (z podstron: `../../#<slug>`); kategoria bez
 wpisów zachowuje link do własnej podstrony. Podstrony kategorii i `/wydarzenia/` nadal istnieją jako pełne listy.
