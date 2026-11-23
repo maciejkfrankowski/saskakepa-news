@@ -21,6 +21,7 @@
       </a></li>
       {% endfor %}
     </ul>
+    {% if not today %}<p class="today-empty">{{ t.today_empty }}</p>{% endif %}
     <a class="today-more" href="{{ root }}{{ p.fun }}/">{{ m.icon('puzzle') }}{{ t.sudoku_link }} →</a>
   </aside>
 </section>

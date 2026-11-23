@@ -2,7 +2,7 @@
 
 ```mermaid
 flowchart LR
-  C[Actions: cron 04:17 UTC / push / ręcznie] --> F[gn.fetch]
+  C[Actions: cron 04:17, 11:07 i 16:07 UTC / push / ręcznie] --> F[gn.fetch]
   S[sources.yaml] --> F
   F -->|rss / html_links| J[data/items.json<br/>data/status.json]
   J -->|commit bota| R[(repo)]

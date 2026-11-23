@@ -1,6 +1,6 @@
 # saskakepa-news
 
-Statyczny serwis z lokalnymi wiadomościami z Saskiej Kępy (Warszawa, Praga-Południe). GitHub Actions raz dziennie
+Statyczny serwis z lokalnymi wiadomościami z Saskiej Kępy (Warszawa, Praga-Południe). GitHub Actions trzy razy dziennie
 pobiera komunikaty ze źródeł publicznych, zapisuje je w `data/items.json` i publikuje stronę na
 GitHub Pages. Własne artykuły to pliki Markdown w `content/articles/`.
 

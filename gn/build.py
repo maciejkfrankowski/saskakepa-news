@@ -279,11 +279,11 @@ def build() -> None:
     # Strona główna
     hero = next((e for e in entries if e["featured"]), entries[0] if entries else None)
     rest = [e for e in entries if e is not hero]
-    today, seen = events[:2], set()
-    for entry in rest:  # „Grodzisk dziś”: najnowszy wpis z każdej kategorii
-        if entry["category"] not in seen:
-            seen.add(entry["category"])
-            today.append(entry)
+    # „… dziś”: tylko pozycje z dzisiejszą lub późniejszą datą – wiadomości opublikowane dziś
+    # i nadchodzące wydarzenia (najwyżej 4; najpierw dwa najbliższe wydarzenia, potem wiadomości)
+    news_today = [e for e in rest if e["published"][:10] >= today_iso]
+    today = (events[:2] + news_today)[:4]
+    today += [e for e in events[2:] if e not in today][:4 - len(today)]
     fresh = [e for e in rest if e not in today[:4]]
     top, more = fresh[:2], fresh[2:8]  # dwie duże pozycje + zwarta lista
     # Strona główna zawiera też zawartość kategorii (domyślnie po 4 najnowsze), a na końcu wydarzenia;

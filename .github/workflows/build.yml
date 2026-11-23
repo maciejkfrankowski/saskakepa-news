@@ -2,7 +2,10 @@ name: Pobierz i opublikuj
 
 on:
   schedule:
-    - cron: "17 4 * * *"   # codziennie ok. 5:17/6:17 czasu polskiego (UTC)
+    # godziny w UTC: zimą +1 h, latem +2 h czasu polskiego/niemieckiego
+    - cron: "17 4 * * *"    # rano, ok. 5:17 (zimą) / 6:17 (latem)
+    - cron: "7 11 * * *"    # południe, ok. 12:07 / 13:07
+    - cron: "7 16 * * *"    # popołudnie, ok. 17:07 / 18:07
   push:
     branches: [main]
   workflow_dispatch:
