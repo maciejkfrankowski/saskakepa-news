@@ -1,5 +1,53 @@
 [
  {
+  "id": "d35d749a23813b3f",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "KINO KĘPA: “Egon Schiele. Poza tabu”",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/kino-kepa-egon-schiele-poza-tabu/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T11:54:02+00:00",
+  "event_date": "2026-11-25 19:00:00"
+ },
+ {
+  "id": "387d9eca17b18afd",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "#Prom na otwartych wodach / Anna Serafińska",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/prom-na-otwartych-wodach-anna-serafinska/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T11:54:02+00:00",
+  "event_date": "2026-11-26 19:00:00"
+ },
+ {
+  "id": "e074011a171ed086",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "TEATR KĘPA: “Maria Skłodowska-Curie. Doświadczenie”",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/teatr-kepa-maria-sklodowska-curie-doswiadczenie/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T11:54:02+00:00",
+  "event_date": "2026-11-27 19:00:00"
+ },
+ {
+  "id": "cefb08e1f1ef07a6",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "Jazz dla dzieci | Kolorowy rozgardiasz: instrumenty perkusyjne",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/jazz-dla-dzieci-kolorowy-rozgardiasz-instrumenty-perkusyjne/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T11:54:02+00:00",
+  "event_date": "2026-11-28 10:30:00"
+ },
+ {
   "id": "f2d41469b32d3cf8",
   "source": "prom-wydarzenia",
   "source_name": "PROM Kultury – repertuar",
