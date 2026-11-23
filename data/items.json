@@ -1,5 +1,57 @@
 [
  {
+  "id": "806fafcc49a9ce90",
+  "source": "parafia-atenska",
+  "source_name": "Parafia Miłosierdzia Bożego (Ateńska)",
+  "category": "dzielnica",
+  "title": "Adwentowe rozważania poetyckie z muzyką dawną",
+  "lead": "29 listopada",
+  "url": "https://atenska12.pl/2026/11/23/adwentowe-rozwazania-poetyckie-z-muzyka-dawna/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T20:24:09+00:00",
+  "event_date": "",
+  "image": "https://atenska12.pl/wp-content/uploads/2026/11/plakat_koncert_29.11.webp"
+ },
+ {
+  "id": "0a42ef92546ee582",
+  "source": "parafia-atenska",
+  "source_name": "Parafia Miłosierdzia Bożego (Ateńska)",
+  "category": "dzielnica",
+  "title": "Przygotowanie do rocznicy I Komunii Świętej",
+  "lead": "29 listopada",
+  "url": "https://atenska12.pl/2026/11/23/przygotowanie-do-rocznicy-i-komunii-swietej/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T20:24:09+00:00",
+  "event_date": "",
+  "image": "https://atenska12.pl/wp-content/uploads/2026/11/plakat_rocznica_komunii_29.11-724x1024.webp"
+ },
+ {
+  "id": "3ee1e75cef307649",
+  "source": "zdm",
+  "source_name": "Zarząd Dróg Miejskich",
+  "category": "dzielnica",
+  "title": "Wymienimy krawężniki na Saskiej",
+  "lead": "",
+  "url": "https://zdm.waw.pl/aktualnosci/wymienimy-krawezniki-na-saskiej/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T20:24:06+00:00",
+  "event_date": "",
+  "image": "https://zdm.waw.pl/wp-content/uploads/2026/11/20261003_Saska_przed_zmianami-24-800x533.jpg"
+ },
+ {
+  "id": "8697deb9bc0493d7",
+  "source": "zdm",
+  "source_name": "Zarząd Dróg Miejskich",
+  "category": "dzielnica",
+  "title": "Węziej na Wale Miedzeszyńskim przy Walecznych",
+  "lead": "",
+  "url": "https://zdm.waw.pl/aktualnosci/weziej-na-wale-miedzeszynskim-przy-walecznych/",
+  "published": "2026-11-23",
+  "fetched_at": "2026-11-23T20:24:06+00:00",
+  "event_date": "",
+  "image": "https://zdm.waw.pl/wp-content/uploads/2026/11/01292017_raport_wiadukty_itp-scaled.jpg"
+ },
+ {
   "id": "bf1a4acab4760817",
   "source": "narodowy",
   "source_name": "PGE Narodowy",
@@ -159,6 +211,45 @@
   "image": "https://praga-poludnie.policja.gov.pl/dokumenty/zalaczniki/184/oryginal/184-311704.jpg"
  },
  {
+  "id": "4c466bc38cd4622d",
+  "source": "parafia-atenska",
+  "source_name": "Parafia Miłosierdzia Bożego (Ateńska)",
+  "category": "dzielnica",
+  "title": "Koncert „Wiktoria wiedeńska”",
+  "lead": "15 listopada 2026 r. godz. 16:00",
+  "url": "https://atenska12.pl/2026/11/14/koncert-wiktoria-wiedenska/",
+  "published": "2026-11-14",
+  "fetched_at": "2026-11-23T20:24:09+00:00",
+  "event_date": "",
+  "image": "https://atenska12.pl/wp-content/uploads/2026/11/Plakat_Muzyczna_odsiecz_internet.webp"
+ },
+ {
+  "id": "9978c6acb5ad03e4",
+  "source": "parafia-atenska",
+  "source_name": "Parafia Miłosierdzia Bożego (Ateńska)",
+  "category": "dzielnica",
+  "title": "Spotkania przed I Komunią św. i Bierzmowaniem",
+  "lead": "22 listopada 2026 r.",
+  "url": "https://atenska12.pl/2026/11/14/spotkania-przed-i-komunia-sw-i-bierzmowaniem-2/",
+  "published": "2026-11-14",
+  "fetched_at": "2026-11-23T20:24:09+00:00",
+  "event_date": "",
+  "image": "https://atenska12.pl/wp-content/uploads/2026/11/plakat-kom-bierzm.webp"
+ },
+ {
+  "id": "d712021a9e67d05b",
+  "source": "parafia-atenska",
+  "source_name": "Parafia Miłosierdzia Bożego (Ateńska)",
+  "category": "dzielnica",
+  "title": "Katecheza dla najmłodszych",
+  "lead": "Niedziela 15 listopada",
+  "url": "https://atenska12.pl/2026/11/11/katecheza-dla-najmlodszych-2/",
+  "published": "2026-11-11",
+  "fetched_at": "2026-11-23T20:24:09+00:00",
+  "event_date": "",
+  "image": "https://atenska12.pl/wp-content/uploads/2026/11/przedszkolaki-15-listopada-724x1024.webp"
+ },
+ {
   "id": "d88312614ff9f5cc",
   "source": "prom",
   "source_name": "PROM Kultury Saska Kępa",
@@ -209,6 +300,19 @@
   "fetched_at": "2026-11-22T18:41:10+00:00",
   "event_date": "",
   "image": "https://www.pgenarodowy.pl//upload/editor/image/b_1599070580.jpg"
+ },
+ {
+  "id": "5b10c87876b31e98",
+  "source": "parafia-atenska",
+  "source_name": "Parafia Miłosierdzia Bożego (Ateńska)",
+  "category": "dzielnica",
+  "title": "Listopad w naszej parafii",
+  "lead": "od 1 listopada 2026 r.",
+  "url": "https://atenska12.pl/2026/10/26/listopad-w-naszej-parafii/",
+  "published": "2026-10-26",
+  "fetched_at": "2026-11-23T20:24:09+00:00",
+  "event_date": "",
+  "image": "https://atenska12.pl/wp-content/uploads/2026/10/Listopad-683x1024.webp"
  },
  {
   "id": "6617a77c8a896446",
@@ -339,6 +443,19 @@
   "fetched_at": "2026-11-22T18:41:08+00:00",
   "event_date": "",
   "image": ""
+ },
+ {
+  "id": "82c0789c1a377766",
+  "source": "samorzad",
+  "source_name": "Samorząd Mieszkańców Saskiej Kępy",
+  "category": "dzielnica",
+  "title": "Co za porażka! Blaszany mur rozdziera Saską Kępę na pół!",
+  "lead": "",
+  "url": "https://architektura.muratorplus.pl/realizacje/porazka-na-saskiej-kepie-blaszany-mur-rozdziera-dzielnice-na-pol-i-odslania-wstydliwy-problem-warszawy-aa-5uwW-MTF4-uV7M.html",
+  "published": "2026-05-09",
+  "fetched_at": "2026-11-23T20:24:08+00:00",
+  "event_date": "",
+  "image": "https://cdn.galleries.smcloud.net/thumbs/gf-beUZ-3qWB-qbJF_ekrany-akustyczne-na-saskiej-kepie-15-jfif.jpg"
  },
  {
   "id": "0e0723fec62620f3",
