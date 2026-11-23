@@ -33,3 +33,32 @@ MPWiK, Święto Saskiej Kępy, szkoły, parafie, kluby sportowe.
 
 ## Nie pobieramy
 Serwisy komercyjne i prywatne: saskakepa.waw.pl, twoja-praga.pl, agregatory wydarzeń, prasa.
+
+## Rozszerzenie z arkusza Marka (23.11.2026, `baza_zrodel_saskiej_kepy.xlsx`, 32 pozycje)
+
+Dodane do `sources.yaml` (odczytane narzędziem Claude 23.11; z GitHub Actions jeszcze nietestowane):
+
+| id | Źródło | Adres | Adapter | Uwagi |
+|---|---|---|---|---|
+| biblioteka | Biblioteka Publiczna im. Z. J. Rumla | https://bppragapd.pl/feed/ | rss + include | 10 wpisów w kanale, aktywny; filie w całej dzielnicy, tytuły zwykle zawierają adres filii |
+| zdm | Zarząd Dróg Miejskich | https://zdm.waw.pl/aktualnosci/ | html_links + include | 9 wpisów na stronę, bez dat i opisów (data = dzień pobrania); struktura HTML niesprawdzona; kanał `/feed/` nie odpowiada |
+| zielen | Zarząd Zieleni | https://zzw.waw.pl/feed/ | rss + include | kanał główny aktywny (zamiast martwego kanału tagu „Park Skaryszewski”) |
+| samorzad | Samorząd Mieszkańców Saskiej Kępy | https://saska.kepa.warszawa.pl/feed/ | rss | bardzo mało wpisów (ostatni z maja 2026), część to odsyłacze do prasy |
+| parafia-atenska | Parafia Miłosierdzia Bożego | https://atenska12.pl/feed/ | rss + exclude_title | aktywny; cotygodniowe „Ogłoszenia parafialne” odfiltrowane |
+| parafia-nobla | Parafia MB Nieustającej Pomocy | https://nobla16.pl/ | html_links, wyłączone | wpisy `intro.php?display=blog_caly_wpis&blog_id=N`, tytuły to nazwy niedziel; do decyzji |
+
+Urząd dzielnicy oznaczony `enabled: false` (403 z GitHub Actions).
+
+Odrzucone z arkusza:
+
+| Źródło | Powód |
+|---|---|
+| Centrum Promocji Kultury (cpk.art.pl) | kanał RSS martwy (ostatni wpis sierpień 2025) |
+| DK Orion / SBM Ateńska | kanał zawiera tylko ogłoszenia spółdzielni (windy, lokale), brak wydarzeń domu kultury |
+| SaskaKepa.info | kanał to katalog firm (sklepy, usługi), nie wiadomości |
+| Mieszkaniec, Tu Stolica | media komercyjne – nie pobieramy treści |
+| OSiR Praga-Południe, ZGN Praga-Południe | strony nie odpowiedziały narzędziu (portal sportowy miasta jest na tej samej platformie co urząd) |
+| Dom Białoruski, Liceum Francuskie | brak dat lub nieaktualne wpisy |
+| Szkoły (SP 143, 168, 373, ITSW) | strony na platformach szkolnych bez kanału; nie sprawdzano |
+| BIP, Warszawa 19115 | ogólnomiejskie, bez możliwości zawężenia do osiedla |
+| Pozycje z samym Facebookiem (Dzielnia, Święto Saskiej Kępy, Caritas, fundacja) | Facebooka nie pobieramy |

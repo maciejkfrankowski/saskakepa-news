@@ -10,8 +10,10 @@
 okolica: &okolica
   - 'sask\w+ kęp'
   - '\bkęp(a|y|ie|ę|ą)\b'
-  - '(ul\.|ulic\w+)\s+(sask|francusk|parysk|zwycięzców|walecznych|brukselsk|egipsk|ateńsk|londyńsk|katowick|berezyńsk|międzynarodow|obrońców|genewsk|lipsk|dąbrowieck|estońsk|irlandzk|nobla|styki|jakubowsk|finlandzk)'
-  - '(francuskiej|paryskiej|zwycięzców|walecznych|brukselskiej|egipskiej|saskiej|ateńskiej)\s+\d'
+  - '(ul\.|ulic\w+)\s+(sask|francusk|parysk|zwycięzców|walecznych|brukselsk|egipsk|ateńsk|londyńsk|katowick|berezyńsk|międzynarodow|obrońców|genewsk|lipsk|dąbrowieck|estońsk|irlandzk|nobla|styki|jakubowsk|finlandzk|angorsk|meksykańsk|kryniczn|królowej aldony|lotaryńsk)'
+  - '\b(na|przy|wzdłuż)\s+(saskiej|francuskiej|paryskiej|zwycięzców|walecznych|brukselskiej|egipskiej|ateńskiej|angorskiej|meksykańskiej|londyńskiej|katowickiej|berezyńskiej)\b'
+  - '(francuskiej|paryskiej|zwycięzców|walecznych|brukselskiej|egipskiej|saskiej|ateńskiej|angorskiej|meksykańskiej)\s+\d'
+  - '\b(saska|francuska|paryska|angorska|meksykańska|brukselska|egipska|ateńska|londyńska|berezyńska)\s+\d'
   - 'skaryszewsk'
   - 'rond\w+ waszyngtona'
   - 'wał\w* miedzeszyńsk'
@@ -47,6 +49,7 @@ sources:
     strip: ['\bArtykuł\b', 'źródło:\s*pragapld\.um\.warszawa\.pl']
     include: *okolica                   # urząd pisze o całej dzielnicy; bez filtra: usuń tę linię
     home: https://pragapld.um.warszawa.pl
+    enabled: false                      # 403 dla GitHub Actions; włączyć po migracji na VPS lub zgodzie urzędu
 
   - id: narodowy
     name: PGE Narodowy
@@ -66,3 +69,54 @@ sources:
     require_date: true
     include: *okolica
     home: https://praga-poludnie.policja.gov.pl
+
+  - id: biblioteka
+    name: Biblioteka Publiczna im. Z. J. Rumla
+    category: kultura
+    adapter: rss
+    url: https://bppragapd.pl/feed/
+    include: *okolica                   # biblioteka ma filie w całej dzielnicy; na Kępie: Angorska, Meksykańska, Zwycięzców
+    home: https://bppragapd.pl
+
+  - id: zdm
+    name: Zarząd Dróg Miejskich
+    category: dzielnica
+    adapter: html_links
+    url: https://zdm.waw.pl/aktualnosci/
+    link_pattern: 'zdm\.waw\.pl/aktualnosci/[^/?#]+/?$'
+    include: *okolica                   # lista obejmuje całą Warszawę; wpisy nie mają dat (data = dzień pobrania)
+    home: https://zdm.waw.pl
+
+  - id: zielen
+    name: Zarząd Zieleni m.st. Warszawy
+    category: dzielnica
+    adapter: rss
+    url: https://zzw.waw.pl/feed/
+    include: *okolica
+    home: https://zzw.waw.pl
+
+  - id: samorzad
+    name: Samorząd Mieszkańców Saskiej Kępy
+    category: dzielnica
+    adapter: rss
+    url: https://saska.kepa.warszawa.pl/feed/     # mało wpisów (kilka w roku), część to odsyłacze do prasy
+    home: https://saska.kepa.warszawa.pl
+
+  - id: parafia-atenska
+    name: Parafia Miłosierdzia Bożego (Ateńska)
+    category: dzielnica
+    adapter: rss
+    url: https://atenska12.pl/feed/
+    exclude_title: '^ogłoszenia parafialne'      # cotygodniowe ogłoszenia; zostają koncerty i wydarzenia
+    home: https://atenska12.pl
+
+  - id: parafia-nobla
+    name: Parafia MB Nieustającej Pomocy (Nobla)
+    category: dzielnica
+    adapter: html_links
+    url: https://nobla16.pl/
+    link_pattern: 'display=blog_caly_wpis&blog_id=\d+'
+    require_date: true
+    enabled: false                      # wpisy to cotygodniowe ogłoszenia z tytułem niedzieli; struktura niesprawdzona
+    home: https://nobla16.pl
+
