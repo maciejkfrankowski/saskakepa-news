@@ -39,6 +39,9 @@ jobs:
 
       - name: Pobierz źródła
         run: python -m gn.fetch
+        env:
+          # dobór ilustracji modelem AI (gn/photo_ai.py); bez sekretu serwis działa na słowach-kluczach
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
       - name: Zapisz dane w repo
         run: |

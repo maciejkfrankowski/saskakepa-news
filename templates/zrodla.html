@@ -19,4 +19,10 @@
 {% if pool %}
 <p class="lead">{{ t.photo_pool }}: {% for topic, count in pool|dictsort %}{{ topic }} {{ count }}{{ ", " if not loop.last }}{% endfor %}.</p>
 {% endif %}
+{% if photo_ai.asked %}
+<p class="lead">{{ t.photo_ai_topics }} ({{ photo_ai.asked }}): {% for topic, count in photo_ai.topics %}{{ topic }} {{ count }}{{ ", " if not loop.last }}{% endfor %}.</p>
+{% if photo_ai.missing %}
+<p class="lead">{{ t.photo_ai_missing }}: {% for name, count in photo_ai.missing %}{{ name }} {{ count }}{{ ", " if not loop.last }}{% endfor %}.</p>
+{% endif %}
+{% endif %}
 {% endblock %}

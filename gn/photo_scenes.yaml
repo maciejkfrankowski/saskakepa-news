@@ -1,0 +1,408 @@
+# Katalog scen puli ilustracji (static/img/topics-photo/) dla doboru zdjęć modelem AI (gn/photo_ai.py).
+# Klucz sceny = nazwa pliku bez rozszerzenia. Opisy sprawdzone z obrazami 23.11.2026.
+# Po podmianie lub dodaniu obrazu popraw tu jego opis; plik bez opisu nie jest proponowany modelowi.
+# `use` = o czym są artykuły z tej grupy (po angielsku, bo trafia do promptu wspólnego dla pl i de).
+
+boar:
+  use: wild boars in town, culling, African swine fever
+  scenes:
+    boar-1: a sow with striped piglets crossing a town street in daylight
+    boar-2: a single boar rooting in the grass verge beside a pavement
+    boar-3: a boar at night next to an overturned rubbish bin with spilled waste
+    boar-4: a group of boars with a piglet walking down a misty street
+    boar-5: a boar standing on a pavement by a metal fence
+    boar-6: a boar close-up at dusk by a playground fence
+
+road:
+  use: roadworks, street repairs, closures, detours, traffic changes, new pavements
+  scenes:
+    road-1: orange traffic cones lined up on fresh asphalt
+    road-2: a road roller compacting new asphalt on a residential street
+    road-3: a shovel and stacked paving stones beside a half-finished pavement
+    road-4: an excavator bucket by a trench, red-white barrier tape, closed street
+    road-5: wet cobbled street at dusk with blurred car lights
+    road-6: an empty roundabout with trees in morning mist
+
+bus:
+  use: buses, local public transport, timetables, stops, routes
+  scenes:
+    bus-1: an empty bus shelter with a bench on a quiet street
+    bus-2: empty seats and yellow handrails inside a city bus
+    bus-3: a city bus passing by with motion blur
+    bus-4: a hand holding a handrail inside a bus
+    bus-5: yellow bus-bay road markings, no vehicles
+    bus-6: open bus doors at a stop on a rainy evening, warm interior light
+    bus-7: a bus stop pole with a blank sign beside a road
+    bus-8: a ticket validator on a pole inside a bus
+    bus-9: a row of buses parked at a depot, no markings
+
+train:
+  use: railway, commuter trains, stations, level crossings
+  scenes:
+    train-1: railway tracks curving between trees at golden hour
+    train-2: an empty small-town platform with a bench and a lamp post
+    train-3: empty seats inside a commuter train
+    train-4: close-up of steel rails and gravel
+    train-5: a level crossing with raised barriers on a country road
+    train-6: a commuter train arriving at a platform, motion blur
+
+stage:
+  use: concerts, theatre, exhibitions, recitals, festivals, meetings with artists
+  scenes:
+    stage-1: a microphone on a stand on an empty stage
+    stage-2: dark empty theatre stage with curtains and a spotlight on the floor
+    stage-3: hands playing a grand piano
+    stage-4: a gallery wall with abstract framed paintings and a bench
+    stage-5: rows of empty red theatre seats
+    stage-6: a violin and a sheet-music stand in a rehearsal room
+    stage-7: a saxophone on a stand in a dim jazz club
+    stage-8: a drum kit and amplifiers on a small stage
+    stage-9: an easel with brushes and paint tubes in a studio
+
+cinema:
+  use: cinema, film screenings, film events
+  scenes:
+    cinema-1: a projector beam cutting through a dark cinema hall
+    cinema-2: empty cinema seats facing a blank white screen
+    cinema-3: a bucket of popcorn on a cinema armrest
+    cinema-4: a vintage film projector with reels
+    cinema-5: dim cinema aisle with floor lights and a blank screen
+    cinema-6: a film clapperboard with a blank slate
+
+library:
+  use: library, books, reading clubs, author meetings
+  scenes:
+    library-1: tall bookshelves in a quiet library aisle
+    library-2: an open book on a table by a window
+    library-3: a stack of hardcover books next to a cup of tea
+    library-4: a reading corner with an armchair and a floor lamp
+    library-5: a hand taking a book from a shelf
+    library-6: colourful children's books in a wooden box
+
+school:
+  use: schools, kindergartens, pupils, teachers, enrolment, education
+  scenes:
+    school-1: an empty classroom with wooden desks and a green chalkboard
+    school-2: coloured pencils and an open blank notebook
+    school-3: school backpacks hanging on hooks in a corridor
+    school-4: an empty school corridor with lockers
+    school-5: wooden blocks and toys on a kindergarten carpet
+    school-6: an empty school playground with a basketball hoop
+
+health:
+  use: health, hospital, clinics, screenings, vaccinations, blood donation, first aid courses
+  scenes:
+    health-1: a stethoscope next to a blank clipboard
+    health-2: an empty bright clinic corridor with chairs
+    health-3: a blood-pressure cuff on a table in a doctor's office
+    health-4: medical gloves and a sealed syringe on a tray
+    health-5: an empty hospital bed by a window
+    health-6: a plain first-aid case on a table
+    health-7: a first-aid training manikin on a mat in a hall
+    health-8: bandage rolls and plasters laid out on a table
+    health-9: an armchair and a box of tissues in a quiet counselling room
+
+waste:
+  use: waste collection, recycling, sorting, collection schedules, composting, ecology
+  scenes:
+    waste-1: a row of yellow, blue, green and brown recycling bins by a fence
+    waste-2: a garbage truck lifting a bin
+    waste-3: flattened cardboard and glass bottles sorted into crates
+    waste-4: a hand dropping a plastic bottle into a yellow bin
+    waste-5: a wooden compost bin with autumn leaves
+    waste-6: tied waste bags placed at the kerb
+
+water:
+  use: tap water, waterworks, sewerage, pipe failures, supply interruptions, river
+  scenes:
+    water-1: a glass being filled with tap water at a kitchen sink
+    water-2: a red street hydrant on a wet pavement
+    water-3: an open trench with a new blue water pipe and tools
+    water-4: a round manhole cover on a wet cobbled street
+    water-5: water flowing from an outdoor tap into a metal bucket
+    water-6: a calm river bank with reeds in morning mist
+    water-7: a household water meter on a pipe in a cellar, dial out of focus
+    water-8: a water tower on a hill above a small town
+    water-9: pumps and blue pipes inside a waterworks station
+
+police:
+  use: police, safety, theft, fraud warnings, traffic checks, crime prevention
+  scenes:
+    police-1: blurred blue emergency lights reflected on a wet street at night
+    police-2: a reflective safety vest and a torch on a car bonnet at dusk
+    police-3: an empty zebra crossing at night under a street lamp
+    police-4: a bicycle locked with a heavy chain to a rack
+    police-5: a key in a sturdy front-door lock
+    police-6: a speed camera on a tripod by a roadside
+
+fire:
+  use: fire brigade, volunteer firefighters, fire safety, equipment
+  scenes:
+    fire-1: a coiled red fire hose with a brass nozzle
+    fire-2: a red firefighter's helmet and gloves on a bench
+    fire-3: chrome valves and gauges on the side of a fire engine
+    fire-4: a red fire extinguisher mounted on a wall
+    fire-5: a red fire engine in an open fire-station garage
+    fire-6: a smoke detector on a ceiling
+
+council:
+  use: town hall, council sessions, resolutions, mayor, budget, elections, public consultations, spatial planning
+  scenes:
+    council-1: an empty council chamber with desks and microphones
+    council-2: a fountain pen lying on a stack of documents
+    council-3: the stone facade and wooden door of a small-town hall
+    council-4: a clear ballot box on a table in an empty hall
+    council-5: a conference table with glasses of water and notepads
+    council-6: architectural plans and a scale ruler on a desk
+
+celebration:
+  use: holidays, anniversaries, commemorations, fairs, festivals, picnics, parades
+  scenes:
+    celebration-1: colourful bunting strung across a town street on a sunny day
+    celebration-2: candles burning in glass holders at dusk
+    celebration-3: a wreath of flowers leaning against a stone monument base
+    celebration-4: a market stall with gingerbread hearts and warm string lights
+    celebration-5: brass trumpets and a drum resting on chairs before a parade
+    celebration-6: picnic tables with checked tablecloths and balloons in a park
+
+sport:
+  use: sport, matches, tournaments, races, leagues, sports halls
+  scenes:
+    sport-1: a football on a grass pitch
+    sport-2: running shoes on a red athletics track
+    sport-3: an empty indoor sports hall with a handball goal
+    sport-4: a table-tennis bat and ball on a blue table
+    sport-5: a volleyball net on an outdoor court
+    sport-6: a row of medals with ribbons on a table
+    sport-7: close-up of a goal net on a grass football pitch
+    sport-8: football boots and shin pads on a changing-room bench
+    sport-9: rowing boats stored on racks by a river
+    sport-10: oars and a rowing boat on calm water at a jetty
+    sport-11: a folded martial-arts jacket with a black belt on a mat
+    sport-12: a referee's whistle and a stopwatch on a bench
+
+swim:
+  use: swimming pool, swimming lessons, pool opening hours
+  scenes:
+    swim-1: empty indoor pool lanes with lane ropes
+    swim-2: starting blocks at the edge of an outdoor pool
+    swim-3: swimming goggles and a folded towel on the pool edge
+    swim-4: light patterns on calm pool water
+    swim-5: a pool ladder with chrome handrails
+    swim-6: a stack of colourful kickboards by a pool
+
+notice:
+  use: official announcements, calls for applications, grants, competitions, tenders, office hours, forms
+  scenes:
+    notice-1: a cork notice board with blank sheets pinned to it
+    notice-2: a letterbox with an envelope sticking out
+    notice-3: a blank desk calendar, a pen and reading glasses
+    notice-4: a hand filling in a form with a pen
+    notice-5: an office counter with a small bell and a blank information stand
+    notice-6: a laptop with a blank screen next to a coffee cup
+    notice-7: a closed office door with an empty sign holder
+    notice-8: a wall clock without numerals above an empty waiting room
+    notice-9: a stack of folders and a rubber stamp on a desk
+
+general:
+  use: neutral small-town views for articles that fit no other group
+  scenes:
+    general-1: a quiet market square with a fountain in morning light
+    general-2: a bench under trees in a town park in autumn
+    general-3: tiled rooftops of a small town at sunrise, seen from above
+    general-4: a tree-lined residential street with parked bicycles
+    general-5: a wooden footbridge over a small river
+    general-6: red geraniums on the windowsills of a townhouse
+
+# --- Grupy dodane 24.11.2026 (lista do wygenerowania: docs/05-rozbudowa-puli.md) ---
+# Scena działa dopiero wtedy, gdy plik o tej nazwie jest w static/img/topics-photo/.
+
+meeting:
+  use: workshops, training courses, information meetings, public consultations, networking events
+  scenes:
+    meeting-1: a circle of empty chairs in a bright community room
+    meeting-2: a blank flipchart on a stand next to a row of chairs
+    meeting-3: a seminar room with tables in a U-shape, blank notepads and pens
+    meeting-4: coffee cups and a thermos on a side table in a meeting room
+    meeting-5: a blank projector screen in a small lecture hall with empty seats
+    meeting-6: blank sticky notes and markers spread on a table
+
+award:
+  use: awards, honours, distinctions, jubilees, volunteers, contest winners
+  scenes:
+    award-1: a plain glass trophy on a wooden table
+    award-2: a bouquet of flowers next to a blank framed certificate
+    award-3: a plain medal in an open presentation box
+    award-4: two hands shaking, close-up, blurred hall behind
+    award-5: a lectern with a microphone and flowers on an empty stage
+    award-6: a plain golden cup on a shelf
+
+kids:
+  use: playgrounds, children's events, family picnics, kindergarten activities, lantern parades
+  scenes:
+    kids-1: an empty playground with swings and a slide
+    kids-2: a sandbox with a bucket and a spade
+    kids-3: colourful abstract chalk drawings on a pavement
+    kids-4: glowing paper lanterns on sticks at dusk
+    kids-5: soap bubbles floating in a park
+    kids-6: a child's bicycle with training wheels leaning on a fence
+
+seniors:
+  use: seniors, senior clubs, gentle exercise groups, social care, carers, family support
+  scenes:
+    seniors-1: two cups of coffee and a board game on a table in a day room
+    seniors-2: a walking stick leaning against a park bench
+    seniors-3: exercise mats and light dumbbells in a community hall
+    seniors-4: knitting needles and wool on an armchair
+    seniors-5: two elderly people walking in a park, seen from behind at a distance
+    seniors-6: a teapot and biscuits on a lace tablecloth
+
+work:
+  use: jobs, job fairs, apprenticeships, vocational training, local business, entrepreneurs
+  scenes:
+    work-1: rows of empty tables and chairs in a job-fair hall
+    work-2: a tool belt and work gloves on a workbench
+    work-3: a laptop, a blank notebook and a hard hat on a desk
+    work-4: a handshake over a desk, close-up
+    work-5: a carpenter's hands planing a wooden board
+    work-6: a small office with empty desks and chairs
+
+build:
+  use: construction of buildings, renovations, municipal investments, new facilities, building plots
+  scenes:
+    build-1: scaffolding on the facade of a townhouse
+    build-2: a tower crane above a building site, seen from a distance
+    build-3: a roof under renovation with stacks of new tiles
+    build-4: a concrete mixer and a pallet of bricks on a building site
+    build-5: the timber roof frame of a new building against the sky
+    build-6: an empty fenced building plot with surveying stakes
+
+nature:
+  use: environment, climate, trees, parks, forests, hunting closures, drought, tree planting
+  scenes:
+    nature-1: a forest path in autumn
+    nature-2: freshly planted young trees with stakes in a park
+    nature-3: dry cracked soil in a field
+    nature-4: a wooden hunting high seat at the edge of a forest
+    nature-5: a wildflower meadow with a bee on a flower
+    nature-6: hands holding a seedling with soil
+
+animals:
+  use: pets, stray animals, wildlife warnings, rabies, vets, animal shelters, animals in hot or cold weather
+  scenes:
+    animals-1: a fox at the edge of a forest at dusk
+    animals-2: a dog on a leash on a pavement, seen from behind
+    animals-3: a cat sitting on a windowsill
+    animals-4: a bowl of water for animals on a pavement in summer
+    animals-5: a pet carrier and a stethoscope on a vet's table
+    animals-6: a hedgehog in autumn leaves
+
+farm:
+  use: agriculture, harvest festivals, crop damage, orchards, farmers' markets
+  scenes:
+    farm-1: a harvest wreath made of grain ears
+    farm-2: hay bales on a stubble field
+    farm-3: crates of apples in an orchard
+    farm-4: a tractor on a field track, no markings
+    farm-5: a basket of vegetables on a market table
+    farm-6: a loaf of bread and grain ears on a linen cloth
+
+xmas:
+  use: Christmas markets, Advent, Christmas events and concerts, holiday wishes
+  scenes:
+    xmas-1: fir branches with warm fairy lights, soft bokeh
+    xmas-2: a wooden market stall with string lights on a snowy evening
+    xmas-3: baubles on a Christmas tree, close-up
+    xmas-4: mugs of mulled wine on a wooden counter
+    xmas-5: an Advent wreath with burning candles
+    xmas-6: a decorated Christmas tree on a small town square at dusk
+
+winter:
+  use: snow, frost, snow clearing, icy roads, heating season
+  scenes:
+    winter-1: a snow shovel leaning against a wall by a cleared pavement
+    winter-2: a snow-covered street with tyre tracks in the morning
+    winter-3: frost patterns on a window pane
+    winter-4: a grit bin by a snowy roadside
+    winter-5: a radiator with a thermostat under a window
+    winter-6: icicles hanging from a roof gutter
+
+hiking:
+  use: hiking trails, walks, tourism, viewpoints, guided tours, chairlifts
+  scenes:
+    hiking-1: hiking boots on a rocky viewpoint above a river valley
+    hiking-2: a wooden trail signpost with blank arrows in a forest
+    hiking-3: a path through vineyards on a hillside
+    hiking-4: a backpack and trekking poles leaning against a bench
+    hiking-5: a chairlift above a wooded hillside
+    hiking-6: a wooden bench at a viewpoint over hills
+
+garden:
+  use: garden shows, public greenery, flower beds, planting campaigns, allotments
+  scenes:
+    garden-1: flower beds in a riverside park
+    garden-2: a hand trowel and potted perennials ready for planting
+    garden-3: a watering can among flowers
+    garden-4: a cherry tree in blossom
+    garden-5: butterflies on lavender
+    garden-6: gardening gloves and secateurs on a wooden crate
+
+energy:
+  use: electricity, power cuts, gas, heating, energy prices, street lighting, solar panels
+  scenes:
+    energy-1: power lines and a pylon against the sky
+    energy-2: a household fuse box with switches, no labels
+    energy-3: a glowing light bulb
+    energy-4: solar panels on a tiled roof
+    energy-5: a burning gas hob
+    energy-6: a street lamp lit at dusk
+
+money:
+  use: budgets, finances, taxes, fees, grants and funding, financial fraud warnings
+  scenes:
+    money-1: stacks of coins on a table
+    money-2: a calculator and a pen on blank sheets
+    money-3: a piggy bank on a windowsill
+    money-4: an open wallet with coins
+    money-5: a hand dropping a coin into a glass jar
+    money-6: a payment terminal and a plain card on a counter
+
+digital:
+  use: online services, apps, computer courses, cybersecurity, e-office, internet
+  scenes:
+    digital-1: hands typing on a laptop keyboard
+    digital-2: a hand holding a smartphone with a blank screen
+    digital-3: a small padlock lying on a laptop keyboard
+    digital-4: a wifi router with glowing lights
+    digital-5: a tablet with a blank screen on a desk next to glasses
+    digital-6: a computer mouse and network cables on a desk
+
+food:
+  use: culinary events, cooking workshops, wine festivals, regional products, food markets
+  scenes:
+    food-1: wine glasses on a table with a vineyard behind
+    food-2: a pot and a wooden spoon on a stove
+    food-3: a long table set with shared dishes
+    food-4: fresh bread and cheese on a wooden board
+    food-5: chopped vegetables on a cutting board
+    food-6: ripe grapes on a vine
+
+bike:
+  use: cycling, bike paths, bike rides, bicycle infrastructure
+  scenes:
+    bike-1: an empty cycle path along a river
+    bike-2: bicycles parked in a rack
+    bike-3: a bicycle handlebar and bell, close-up
+    bike-4: a cyclist on a riverside path, seen from behind at a distance
+    bike-5: a bike pump and repair tools on the ground
+    bike-6: a helmet hanging on bicycle handlebars
+
+alert:
+  use: public warnings, warning sirens, crisis management, storms, floods, environmental incidents
+  scenes:
+    alert-1: a warning siren on a rooftop against the sky
+    alert-2: dark storm clouds over town rooftops
+    alert-3: sandbags stacked by a doorway
+    alert-4: an orange warning lamp on a road barrier
+    alert-5: a torch, a battery radio and water bottles on a table
+    alert-6: a flooded riverside path with a barrier

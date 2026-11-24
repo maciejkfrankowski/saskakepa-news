@@ -13,6 +13,7 @@ from pathlib import Path
 
 import yaml
 
+from . import photo_ai
 from .fetchers import ADAPTERS, http
 from .models import now_iso
 
@@ -134,6 +135,11 @@ def run() -> int:
               f"nowych {entry['added']} {entry['error']}")
     if site.get("source_images"):
         print(f"Miniatury: sprawdzono {add_images(items)} wpisów")
+    try:  # dobór ilustracji modelem AI; bez klucza albo przy awarii serwis zostaje przy słowach-kluczach
+        print(photo_ai.annotate(items, ROOT, bool(site.get("source_images")),
+                                site.get("photo_ai_model") or photo_ai.DEFAULT_MODEL))
+    except Exception as error:  # noqa: BLE001
+        print(f"Dobór zdjęć AI: pominięty ({str(error)[:300]})")
     save_json(ITEMS_PATH, items)
     save_json(STATUS_PATH, status)
     return 0

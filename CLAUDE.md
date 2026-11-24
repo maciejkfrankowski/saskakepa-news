@@ -35,6 +35,7 @@ Etap: demo na darmowej infrastrukturze (GitHub Actions + Pages). Docelowo możli
 | `gn/fetchers/` | adaptery `rss`, `html_links`, `tribe_events`, klient HTTP |
 | `gn/sudoku.py`, `static/sudoku.js` | generator i gra „Sudoku dnia” |
 | `gn/build.py` | generator `dist/` |
+| `gn/photo_ai.py`, `gn/photo_scenes.yaml` | dobór ilustracji z puli modelem AI przy pobieraniu; katalog scen (opis w `docs/04-dobor-zdjec-ai.md`, lista do wygenerowania w `docs/05-rozbudowa-puli.md`) |
 | `templates/`, `static/` | szablony Jinja2, CSS, JS |
 | `static/img/topics-photo/` | pula ilustracji AI (pliki wgrywa redakcja; opis w `docs/03-pula-zdjec-ai.md`) |
 | `content/articles/` | własne artykuły (Markdown + YAML) |

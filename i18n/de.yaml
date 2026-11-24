@@ -70,6 +70,8 @@ more_news: Alle Meldungen
 # (Reihenfolge = Vorrang; ohne Treffer bleibt die Rubrik-Kachel).
 photo_label: KI-Bild
 photo_pool: KI-Bilderpool (Thema und Anzahl)
+photo_ai_topics: KI-Bildauswahl – Beiträge je Gruppe
+photo_ai_missing: Am häufigsten fehlende Motive (englisch, vom Modell)
 topics:
   boar: '\b(wildschwein|schwarzwild|wildsau|schweinepest)'
   swim: '(schwimm|hallenbad|freibad|dlrg|rettungsschwimm)'

@@ -16,6 +16,7 @@ import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from .models import clean_lead
+from .photo_ai import NONE, POOL_DIR, photo_pool, stats as photo_stats
 from .sudoku import daily
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,26 +27,14 @@ PL_MAP = str.maketrans({**str.maketrans("ąćęłńóśźż", "acelnoszz"),
                         ord("ä"): "ae", ord("ö"): "oe", ord("ü"): "ue", ord("ß"): "ss"})
 
 
-POOL_DIR = Path("static") / "img" / "topics-photo"
-POOL_FILE = re.compile(r"^([a-z]+)[-_ ].*\.(jpe?g|png|webp)$", re.I)
-POOL_WIDTH = 800
+POOL_WIDTH = 800  # `photo_pool` i `POOL_DIR` mieszkają w gn/photo_ai.py (potrzebne też przy pobieraniu)
 
 
-def photo_pool(root: Path) -> dict[str, list[str]]:
-    """Pula zdjęć tematycznych: pliki `<temat>-<cokolwiek>.jpg|png|webp` pogrupowane po temacie."""
-    pool: dict[str, list[str]] = {}
-    folder = root / POOL_DIR
-    for path in sorted(folder.iterdir()) if folder.is_dir() else []:
-        match = POOL_FILE.match(path.name)
-        if match:
-            pool.setdefault(match.group(1).lower(), []).append(path.name)
-    return pool
+def photo_candidates(pool: dict[str, list[str]], topic: str, key: str, picks: list[str] | tuple = ()) -> list[str]:
+    """Zdjęcia dla wpisu w kolejności preferencji: ranking modelu, reszta grupy tematu, potem `general`.
 
-
-def photo_candidates(pool: dict[str, list[str]], topic: str, key: str) -> list[str]:
-    """Zdjęcia dla wpisu w kolejności preferencji: grupa tematu, potem `general`.
-
-    Każda grupa zaczyna się od pozycji wynikającej z identyfikatora wpisu, więc wpis ma swoje
+    `picks` to nazwy plików bez rozszerzenia wybrane przez model (`photo_ai.picks`); nieistniejące pomijamy.
+    Reszta grupy zaczyna się od pozycji wynikającej z identyfikatora wpisu, więc wpis ma swoje
     „ulubione” zdjęcie (to samo przy każdej budowie), a kolejne są rezerwą na wypadek powtórki.
     """
     start = zlib.crc32(key.encode())
@@ -54,7 +43,9 @@ def photo_candidates(pool: dict[str, list[str]], topic: str, key: str) -> list[s
         files = pool.get(group) or []
         offset = start % len(files) if files else 0
         ordered += files[offset:] + files[:offset]
-    return ordered
+    by_stem = {Path(name).stem: name for name in pool.get(topic) or []}
+    first = [by_stem[pick] for pick in picks if pick in by_stem]
+    return first + [name for name in ordered if name not in first]
 
 
 def pick_photo(pool: dict[str, list[str]], topic: str, key: str) -> str:
@@ -71,9 +62,9 @@ def assign_photos(pool: dict[str, list[str]], visible: list[dict], others: list[
     ale nie zaraz po sobie w tej samej kategorii.
     """
     def wanted(entry: dict) -> list[str]:
-        if entry["image"] or entry["event_date"]:
+        if entry["image"] or entry["event_date"] or entry.get("no_pool"):
             return []
-        return photo_candidates(pool, entry["topic"], entry.get("id") or entry["href"])
+        return photo_candidates(pool, entry["topic"], entry.get("id") or entry["href"], entry.get("picks") or ())
 
     used: set[str] = set()
     previous: dict[str, str] = {}  # ostatnie zdjęcie w kategorii
@@ -235,11 +226,19 @@ def build() -> None:
         if entry["event_date"]:
             entry.update(event_labels(entry["event_date"]))
     topics = [(name, re.compile(pattern, re.I)) for name, pattern in (T.get("topics") or {}).items()]
-    for entry in everything:  # ilustracja tematyczna tylko tam, gdzie nie ma zdjęcia
-        entry["topic"] = "" if entry["image"] or entry["event_date"] else next(
-            (name for name, pattern in topics if pattern.search(entry["title"])), "")
     # zdjęcie ilustracyjne z puli zastępuje rysowaną ilustrację; wpisy ze zdjęciem i wydarzenia zostają bez zmian
     pool = photo_pool(ROOT)
+    for entry in everything:  # ilustracja tematyczna tylko tam, gdzie nie ma zdjęcia
+        entry["topic"] = ""
+        if entry["image"] or entry["event_date"]:
+            continue
+        chosen = entry.get("photo_ai") or {}  # wybór modelu zapisany przy pobieraniu (gn/photo_ai.py)
+        if chosen.get("topic") == NONE:       # temat wrażliwy: bez zdjęcia z puli i bez rysowanej ilustracji
+            entry["no_pool"] = True
+        elif chosen.get("topic") in pool:
+            entry["topic"], entry["picks"] = chosen["topic"], chosen.get("picks") or []
+        else:                                 # brak odpowiedzi modelu: słowa-klucze w tytule jak dotąd
+            entry["topic"] = next((name for name, pattern in topics if pattern.search(entry["title"])), "")
     # Wydarzenia (z terminem) idą osobnym torem: tylko nadchodzące, od najbliższego
     events = sorted((e for e in everything if e["event_date"][:10] >= today_iso),
                     key=lambda e: e["event_date"])
@@ -326,7 +325,8 @@ def build() -> None:
     render("rozrywka.html", paths["fun"], active="fun", sudoku=sudoku, crosswords=crosswords,
            sudoku_date=date_pl(today_iso))
     render("zrodla.html", paths["sources"], sources=sources, active="",
-           status={s["id"]: s for s in status}, pool={topic: len(files) for topic, files in pool.items()})
+           status={s["id"]: s for s in status}, pool={topic: len(files) for topic, files in pool.items()},
+           photo_ai=photo_stats(everything))
     if site.get("operator"):  # strony wymagane prawem (np. w Niemczech)
         render("impressum.html", paths["imprint"], active="")
         render("datenschutz.html", paths["privacy"], active="")

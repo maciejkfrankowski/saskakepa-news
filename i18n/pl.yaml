@@ -70,6 +70,8 @@ more_news: Wszystkie wiadomości
 # (kolejność ma znaczenie – wygrywa pierwszy pasujący temat; brak dopasowania = kafelek kategorii).
 photo_label: Ilustracja AI
 photo_pool: Pula ilustracji AI (temat i liczba plików)
+photo_ai_topics: Dobór ilustracji modelem AI – wpisy w grupach
+photo_ai_missing: Zdjęcia, których najczęściej brakowało (po angielsku, od modelu)
 topics:
   boar: '\b(dzik(i|a|ów|om|ami|iem|u|ach)?\b|odłów|odstrzał|\basf\b|afrykański\w* pomór)'
   swim: '\b(pływaln|basen)'
