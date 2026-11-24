@@ -1,5 +1,17 @@
 [
  {
+  "id": "2db238d03561cfdb",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "Francuskie klasyki na nowo",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/francuskie-klasyki-na-nowo/",
+  "published": "2026-11-24",
+  "fetched_at": "2026-11-24T14:55:37+00:00",
+  "event_date": "2026-11-28 19:00:00"
+ },
+ {
   "id": "806fafcc49a9ce90",
   "source": "parafia-atenska",
   "source_name": "Parafia Miłosierdzia Bożego (Ateńska)",
@@ -254,8 +266,8 @@
   "source": "prom",
   "source_name": "PROM Kultury Saska Kępa",
   "category": "kultura",
-  "title": "Komunikat w związku z żałobą narodową",
-  "lead": "Komunikat: Z głębokim smutkiem i sercami przepełnionymi bólem w związku z tragedią, która wydarzyła się w Krakowie 7 listopada 2026 […]",
+  "title": "Program na grudzień",
+  "lead": "Grudzień w PROMie to czas bliskości, pięknych opowieści i świątecznej magii ✨🎄 Grudzień ma w sobie coś niezwykłego. Kiedy za […]",
   "url": "https://promkultury.pl/19571-2/",
   "published": "2026-11-08",
   "fetched_at": "2026-11-22T18:41:08+00:00",
