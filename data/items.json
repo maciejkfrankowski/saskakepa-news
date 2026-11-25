@@ -1,5 +1,17 @@
 [
  {
+  "id": "2e20b1769a74aa66",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "KINO KĘPA: “Powiedz mi co czujesz”",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/kino-kepa-powiedz-mi-co-czujesz/",
+  "published": "2026-11-25",
+  "fetched_at": "2026-11-25T14:28:27+00:00",
+  "event_date": "2026-11-29 18:00:00"
+ },
+ {
   "id": "2db238d03561cfdb",
   "source": "prom-wydarzenia",
   "source_name": "PROM Kultury – repertuar",
