@@ -1,5 +1,30 @@
 [
  {
+  "id": "b366abdfae227cd6",
+  "source": "narodowy",
+  "source_name": "PGE Narodowy",
+  "category": "okolica",
+  "title": "Pezet i Sokół – PESO TOUR: finałowy koncert na Błoniach Stadionu Narodowego!",
+  "lead": "Pezet i Sokół łączą siły w projekcie PESO. Wiosną 2027 roku ruszą we wspólną trasę i zagrają serię koncertów - w Gdańsku/Sopocie, Krakowie i Warszawie. W programie trasy znajdą się utwory z PESO oraz największe przeboje…",
+  "url": "https://www.pgenarodowy.pl/aktualnosci/15448,pezet-i-sokol-----peso-tour-finalowy-koncert-na-bloniach-stadionu-narodowego",
+  "published": "2026-11-26",
+  "fetched_at": "2026-11-26T13:57:16+00:00",
+  "event_date": "",
+  "image": "https://www.pgenarodowy.pl//upload/editor/image/b_1201492079.png"
+ },
+ {
+  "id": "1c882eabda2d63dc",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "Teresa Drozda przypomina: Bronisław Pawlik",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/teresa-drozda-przypomina-bronislaw-pawlik/",
+  "published": "2026-11-26",
+  "fetched_at": "2026-11-26T13:57:15+00:00",
+  "event_date": "2026-11-30 19:00:00"
+ },
+ {
   "id": "2e20b1769a74aa66",
   "source": "prom-wydarzenia",
   "source_name": "PROM Kultury – repertuar",
