@@ -1,5 +1,30 @@
 [
  {
+  "id": "25260123bc842f38",
+  "source": "prom-wydarzenia",
+  "source_name": "PROM Kultury – repertuar",
+  "category": "kultura",
+  "title": "Cały ten JAZZ! MEET! – Kamila Drabek",
+  "lead": "",
+  "url": "https://promkultury.pl/wydarzenie/caly-ten-jazz-meet-kamila-drabek/",
+  "published": "2026-11-27",
+  "fetched_at": "2026-11-27T13:56:39+00:00",
+  "event_date": "2026-12-01 19:00:00"
+ },
+ {
+  "id": "75a7336ca821aa16",
+  "source": "narodowy",
+  "source_name": "PGE Narodowy",
+  "category": "okolica",
+  "title": "Black Weekend na Stadionie Narodowym! Bilety na wycieczki 20% taniej!",
+  "lead": "Poznaj Stadion Narodowy bez tajemnic – teraz o 20% taniej! Zaplanuj wizytę na największym stadionie w Polsce i zobacz miejsca na co dzień niedostępne dla kibiców!",
+  "url": "https://www.pgenarodowy.pl/aktualnosci/15452,black-weekend-na-stadionie-narodowym-bilety-na-wycieczki-20--taniej",
+  "published": "2026-11-27",
+  "fetched_at": "2026-11-27T13:56:39+00:00",
+  "event_date": "",
+  "image": "https://www.pgenarodowy.pl//upload/editor/image/b_1186756308.png"
+ },
+ {
   "id": "b366abdfae227cd6",
   "source": "narodowy",
   "source_name": "PGE Narodowy",
